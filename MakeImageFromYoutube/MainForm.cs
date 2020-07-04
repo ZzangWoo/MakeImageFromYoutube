@@ -16,14 +16,30 @@ namespace MakeImageFromYoutube
     public partial class mainForm : System.Windows.Forms.Form
     {
 
-        #region Property
+        #region # Property
 
         /// <summary>
-        /// 고급기능 선택 유무 
-        /// 선택 O => true
-        /// 선택 X => false
+        /// 기입정보 파일 있는지 확인 
         /// </summary>
-        public bool checkedAdvanced { get; set; }
+        /// <returns></returns>
+        private bool ExistInfoFile
+        {
+            get
+            {
+                FileInfo fileInfo = new FileInfo(Application.StartupPath + "\\Info.csv");
+                return fileInfo.Exists ? true : false;
+            }
+        }
+
+        /// <summary>
+        /// 기입 정보 클래스
+        /// </summary>
+        public Info info;
+
+        /// <summary>
+        /// 로그 클래스
+        /// </summary>
+        public Log log;
 
         #endregion
 
@@ -33,8 +49,13 @@ namespace MakeImageFromYoutube
         {
             InitializeComponent();
 
-            // Yes 라디오 버튼 활성화
-            noRadioButton.Checked = true;
+            // 로그 폴더 생성
+            log = new Log();
+            log.CreateLogFolder();
+
+            // 파일 존재 O -> 처음 실행 X
+            // 파일 존재 X -> 처음 실행 O
+            InitializeControl(!ExistInfoFile);
         }
 
         #endregion
@@ -99,7 +120,16 @@ namespace MakeImageFromYoutube
                     }
                     else
                     {
-                        DownloadYoutubeVideo();
+                        // 고급기능 사용 O
+                        if (info.checkedAdvanced)
+                        {
+                            MessageBox.Show("고급기능 개발중");
+                        }
+                        // 고급기능 사용 X
+                        else
+                        {
+                            DownloadYoutubeVideo();
+                        }
                     }
                 }
             }
@@ -112,7 +142,7 @@ namespace MakeImageFromYoutube
         /// <param name="e"></param>
         private void yesRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            checkedAdvanced = true;
+            info.checkedAdvanced = true;
 
             // 고급기능 패널 활성화
             advancedPannel.Visible = true;
@@ -125,13 +155,116 @@ namespace MakeImageFromYoutube
         /// <param name="e"></param>
         private void noRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            checkedAdvanced = false;
+            info.checkedAdvanced = false;
 
             // 고급기능 패널 비활성화
             advancedPannel.Visible = false;
+        }
 
-            // 폼 크기 조절
-            
+        /// <summary>
+        /// 고급기능 -> 시 변경 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void hourTextBox_TextChanged(object sender, EventArgs e)
+        {
+            info.hour = hourTextBox.Text;
+        }
+
+        /// <summary>
+        /// 고급기능 -> 분 변경 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void minuteTextBox_TextChanged(object sender, EventArgs e)
+        {
+            info.minute = minuteTextBox.Text;
+        }
+
+        /// <summary>
+        /// 고급기능 -> 초 변경 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void secondTextBox_TextChanged(object sender, EventArgs e)
+        {
+            info.second = secondTextBox.Text;
+        }
+
+        /// <summary>
+        /// Frame Rate 값 변화 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void frameRateUpDown_ValueChanged(object sender, EventArgs e)
+        {   
+            if (frameRateUpDown.Value < 1)
+            {
+                MessageBox.Show("프레임 레이트를 0으로 설정하면 이미지 변환이 어려울 수 있습니다.");
+                frameRateUpDown.Value = 0;
+            }
+            else if (frameRateUpDown.Value > 5)
+            {
+                MessageBox.Show("프레임 레이트는 5가 넘을 필요가 없습니다.");
+                frameRateUpDown.Value = 5;
+            }
+            else
+            {
+                info.frameRate = frameRateUpDown.Value;
+            }
+        }
+
+        /// <summary>
+        /// 변환할 동영상 경로 체크박스 변화 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void videoPathCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            info.isCheckVideoPath = videoPathCheckBox.Checked;
+
+            if (videoPathCheckBox.Checked)
+            {
+                videoPathTextBox.Enabled = true;
+                videoPathButton.Enabled = true;
+            }
+            else
+            {
+                videoPathTextBox.Enabled = false;
+                videoPathButton.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// 저장할 이미지 경로 체크박스 변화 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void saveImagePathCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            info.isCheckSaveImagePath = saveImagePathCheckBox.Checked;
+
+            if (saveImagePathCheckBox.Checked)
+            {
+                saveImagePathTextBox.Enabled = true;
+                saveImagePathButton.Enabled = true;
+            }
+            else
+            {
+                saveImagePathTextBox.Enabled = false;
+                saveImagePathButton.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// 폼 종료 후 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // 기입정보 저장
+            log.CreateInfoLog(info);
         }
 
         #endregion
@@ -166,9 +299,13 @@ namespace MakeImageFromYoutube
         {
             try
             {
-                string exePath = System.Windows.Forms.Application.StartupPath + @"\ffmpeg\bin\youtube-dl";
+                // 경로 저장
+                string exePath = Application.StartupPath + @"\ffmpeg\bin\youtube-dl";
                 string savedVideoName = storageLocationTextBox.Text + @"\" + savedVideoFileNameTextBox.Text;
                 string command = exePath + " -o " + savedVideoName + " " + youtubeURLTextBox.Text;
+
+                // Youtube 영상 저장경로 저장 (자동 불러오기 위해서)
+                info.savedVideoPath = storageLocationTextBox.Text;
 
                 ProcessStartInfo pri = new ProcessStartInfo();
                 Process pro = new Process();
@@ -194,6 +331,9 @@ namespace MakeImageFromYoutube
                 // 이 코드가 있어야 제대로 유튜브 영상을 다운받을 수 있다.
                 string result = pro.StandardOutput.ReadToEnd();
 
+                // 다운로드 로그 저장
+                log.WriteLog(result);
+
                 pro.WaitForExit();
                 pro.Close();
 
@@ -202,10 +342,49 @@ namespace MakeImageFromYoutube
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "에러발생");
+                // 오류 로그 추가
+            }
+        }
+
+        /// <summary>
+        /// 프로그램 실행 시 컨트롤 초기화 메서드
+        /// isFirst = true -> 처음 실행 O(Info 정보 없음)
+        /// isFirst = false -> 처음 실행 X(Info 정보 있음)
+        /// </summary>
+        /// <param name="isFirst"></param>
+        private void InitializeControl(bool isFirst)
+        {
+            if (isFirst)
+            {
+                info = new Info();
+
+                // No 라디오 버튼 활성화
+                noRadioButton.Checked = true;
+
+                // 변환할 동영상 경로 체크박스 비활성화
+                videoPathCheckBox.Checked = info.isCheckVideoPath;
+                videoPathTextBox.Enabled = info.isCheckVideoPath;
+                videoPathButton.Enabled = info.isCheckVideoPath;
+
+                // 저장할 이미지 경로 체크박스 비활성화
+                saveImagePathCheckBox.Checked = info.isCheckSaveImagePath;
+                saveImagePathTextBox.Enabled = info.isCheckSaveImagePath;
+                saveImagePathButton.Enabled = info.isCheckSaveImagePath;
+
+                // 시작시간 초기화
+                hourTextBox.Text = info.hour;
+                minuteTextBox.Text = info.minute;
+                secondTextBox.Text = info.second;
+
+                // 프레임 레이트 초기화
+                frameRateUpDown.Value = info.frameRate;
+            }
+            else
+            {
+                // Info File이 있는 경우에는 정보 불러와서 Info 클래스에 값 저장 후 컨트롤에 적용
             }
         }
 
         #endregion
-
     }
 }

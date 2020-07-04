@@ -41,36 +41,37 @@
             this.storageLocationTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.advancedPannel = new System.Windows.Forms.Panel();
+            this.saveImageNameTextBox = new System.Windows.Forms.TextBox();
+            this.saveImagePathCheckBox = new System.Windows.Forms.CheckBox();
+            this.videoPathCheckBox = new System.Windows.Forms.CheckBox();
+            this.saveImagePathButton = new System.Windows.Forms.Button();
+            this.videoPathButton = new System.Windows.Forms.Button();
+            this.saveImagePathTextBox = new System.Windows.Forms.TextBox();
+            this.videoPathTextBox = new System.Windows.Forms.TextBox();
+            this.frameRateUpDown = new System.Windows.Forms.NumericUpDown();
+            this.changeImageButton = new System.Windows.Forms.Button();
+            this.secondTextBox = new System.Windows.Forms.TextBox();
+            this.minuteTextBox = new System.Windows.Forms.TextBox();
+            this.hourTextBox = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.yesRadioButton = new System.Windows.Forms.RadioButton();
             this.noRadioButton = new System.Windows.Forms.RadioButton();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.advancedPannel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.frameRateUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -124,7 +125,7 @@
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label1);
             this.panel1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.panel1.Location = new System.Drawing.Point(14, 13);
+            this.panel1.Location = new System.Drawing.Point(2, 2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(774, 221);
             this.panel1.TabIndex = 2;
@@ -194,18 +195,19 @@
             // 
             this.advancedPannel.BackColor = System.Drawing.SystemColors.ControlLight;
             this.advancedPannel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.advancedPannel.Controls.Add(this.textBox6);
-            this.advancedPannel.Controls.Add(this.checkBox2);
-            this.advancedPannel.Controls.Add(this.checkBox1);
-            this.advancedPannel.Controls.Add(this.button3);
-            this.advancedPannel.Controls.Add(this.button2);
-            this.advancedPannel.Controls.Add(this.textBox5);
-            this.advancedPannel.Controls.Add(this.textBox4);
-            this.advancedPannel.Controls.Add(this.numericUpDown1);
-            this.advancedPannel.Controls.Add(this.button1);
-            this.advancedPannel.Controls.Add(this.textBox3);
-            this.advancedPannel.Controls.Add(this.textBox2);
-            this.advancedPannel.Controls.Add(this.textBox1);
+            this.advancedPannel.Controls.Add(this.label20);
+            this.advancedPannel.Controls.Add(this.saveImageNameTextBox);
+            this.advancedPannel.Controls.Add(this.saveImagePathCheckBox);
+            this.advancedPannel.Controls.Add(this.videoPathCheckBox);
+            this.advancedPannel.Controls.Add(this.saveImagePathButton);
+            this.advancedPannel.Controls.Add(this.videoPathButton);
+            this.advancedPannel.Controls.Add(this.saveImagePathTextBox);
+            this.advancedPannel.Controls.Add(this.videoPathTextBox);
+            this.advancedPannel.Controls.Add(this.frameRateUpDown);
+            this.advancedPannel.Controls.Add(this.changeImageButton);
+            this.advancedPannel.Controls.Add(this.secondTextBox);
+            this.advancedPannel.Controls.Add(this.minuteTextBox);
+            this.advancedPannel.Controls.Add(this.hourTextBox);
             this.advancedPannel.Controls.Add(this.label19);
             this.advancedPannel.Controls.Add(this.label17);
             this.advancedPannel.Controls.Add(this.label15);
@@ -220,145 +222,115 @@
             this.advancedPannel.Controls.Add(this.label8);
             this.advancedPannel.Controls.Add(this.label4);
             this.advancedPannel.Controls.Add(this.label3);
-            this.advancedPannel.Location = new System.Drawing.Point(14, 268);
+            this.advancedPannel.Location = new System.Drawing.Point(2, 257);
             this.advancedPannel.Name = "advancedPannel";
             this.advancedPannel.Size = new System.Drawing.Size(774, 257);
             this.advancedPannel.TabIndex = 3;
             // 
-            // label6
+            // saveImageNameTextBox
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 248);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(109, 12);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "고급기능 사용 여부";
+            this.saveImageNameTextBox.Location = new System.Drawing.Point(17, 219);
+            this.saveImageNameTextBox.Name = "saveImageNameTextBox";
+            this.saveImageNameTextBox.Size = new System.Drawing.Size(569, 21);
+            this.saveImageNameTextBox.TabIndex = 10;
             // 
-            // yesRadioButton
+            // saveImagePathCheckBox
             // 
-            this.yesRadioButton.AutoSize = true;
-            this.yesRadioButton.Location = new System.Drawing.Point(152, 246);
-            this.yesRadioButton.Name = "yesRadioButton";
-            this.yesRadioButton.Size = new System.Drawing.Size(31, 16);
-            this.yesRadioButton.TabIndex = 6;
-            this.yesRadioButton.TabStop = true;
-            this.yesRadioButton.Text = "Y";
-            this.yesRadioButton.UseVisualStyleBackColor = true;
-            this.yesRadioButton.CheckedChanged += new System.EventHandler(this.yesRadioButton_CheckedChanged);
+            this.saveImagePathCheckBox.AutoSize = true;
+            this.saveImagePathCheckBox.Location = new System.Drawing.Point(17, 172);
+            this.saveImagePathCheckBox.Name = "saveImagePathCheckBox";
+            this.saveImagePathCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.saveImagePathCheckBox.TabIndex = 9;
+            this.saveImagePathCheckBox.UseVisualStyleBackColor = true;
+            this.saveImagePathCheckBox.CheckedChanged += new System.EventHandler(this.saveImagePathCheckBox_CheckedChanged);
             // 
-            // noRadioButton
+            // videoPathCheckBox
             // 
-            this.noRadioButton.AutoSize = true;
-            this.noRadioButton.Location = new System.Drawing.Point(189, 246);
-            this.noRadioButton.Name = "noRadioButton";
-            this.noRadioButton.Size = new System.Drawing.Size(32, 16);
-            this.noRadioButton.TabIndex = 7;
-            this.noRadioButton.TabStop = true;
-            this.noRadioButton.Text = "N";
-            this.noRadioButton.UseVisualStyleBackColor = true;
-            this.noRadioButton.CheckedChanged += new System.EventHandler(this.noRadioButton_CheckedChanged);
+            this.videoPathCheckBox.AutoSize = true;
+            this.videoPathCheckBox.Location = new System.Drawing.Point(17, 110);
+            this.videoPathCheckBox.Name = "videoPathCheckBox";
+            this.videoPathCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.videoPathCheckBox.TabIndex = 9;
+            this.videoPathCheckBox.UseVisualStyleBackColor = true;
+            this.videoPathCheckBox.CheckedChanged += new System.EventHandler(this.videoPathCheckBox_CheckedChanged);
             // 
-            // label8
+            // saveImagePathButton
             // 
-            this.label8.AutoSize = true;
-            this.label8.ForeColor = System.Drawing.Color.Red;
-            this.label8.Location = new System.Drawing.Point(74, 40);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(110, 12);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "(ex : 00h 00m 00s)";
+            this.saveImagePathButton.Location = new System.Drawing.Point(525, 169);
+            this.saveImagePathButton.Name = "saveImagePathButton";
+            this.saveImagePathButton.Size = new System.Drawing.Size(61, 23);
+            this.saveImagePathButton.TabIndex = 8;
+            this.saveImagePathButton.Text = "찾기";
+            this.saveImagePathButton.UseVisualStyleBackColor = true;
             // 
-            // label9
+            // videoPathButton
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(58, 65);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(12, 12);
-            this.label9.TabIndex = 1;
-            this.label9.Text = "h";
+            this.videoPathButton.Location = new System.Drawing.Point(525, 107);
+            this.videoPathButton.Name = "videoPathButton";
+            this.videoPathButton.Size = new System.Drawing.Size(61, 23);
+            this.videoPathButton.TabIndex = 8;
+            this.videoPathButton.Text = "찾기";
+            this.videoPathButton.UseVisualStyleBackColor = true;
             // 
-            // label10
+            // saveImagePathTextBox
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(182, 65);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(12, 12);
-            this.label10.TabIndex = 1;
-            this.label10.Text = "s";
+            this.saveImagePathTextBox.Location = new System.Drawing.Point(38, 169);
+            this.saveImagePathTextBox.Name = "saveImagePathTextBox";
+            this.saveImagePathTextBox.Size = new System.Drawing.Size(480, 21);
+            this.saveImagePathTextBox.TabIndex = 7;
             // 
-            // label11
+            // videoPathTextBox
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(118, 65);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(16, 12);
-            this.label11.TabIndex = 1;
-            this.label11.Text = "m";
+            this.videoPathTextBox.Location = new System.Drawing.Point(38, 107);
+            this.videoPathTextBox.Name = "videoPathTextBox";
+            this.videoPathTextBox.Size = new System.Drawing.Size(480, 21);
+            this.videoPathTextBox.TabIndex = 7;
             // 
-            // label12
+            // frameRateUpDown
             // 
-            this.label12.AutoSize = true;
-            this.label12.ForeColor = System.Drawing.Color.Maroon;
-            this.label12.Location = new System.Drawing.Point(305, 59);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(81, 12);
-            this.label12.TabIndex = 1;
-            this.label12.Text = "필요하면 개발";
+            this.frameRateUpDown.Location = new System.Drawing.Point(477, 57);
+            this.frameRateUpDown.Name = "frameRateUpDown";
+            this.frameRateUpDown.Size = new System.Drawing.Size(109, 21);
+            this.frameRateUpDown.TabIndex = 6;
+            this.frameRateUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.frameRateUpDown.ValueChanged += new System.EventHandler(this.frameRateUpDown_ValueChanged);
             // 
-            // label13
+            // changeImageButton
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(305, 40);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(57, 12);
-            this.label13.TabIndex = 1;
-            this.label13.Text = "영상 길이";
+            this.changeImageButton.Location = new System.Drawing.Point(628, 56);
+            this.changeImageButton.Name = "changeImageButton";
+            this.changeImageButton.Size = new System.Drawing.Size(119, 184);
+            this.changeImageButton.TabIndex = 5;
+            this.changeImageButton.Text = "이미지 변환";
+            this.changeImageButton.UseVisualStyleBackColor = true;
             // 
-            // label14
+            // secondTextBox
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(15, 91);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(109, 12);
-            this.label14.TabIndex = 1;
-            this.label14.Text = "변환할 동영상 경로";
+            this.secondTextBox.Location = new System.Drawing.Point(140, 56);
+            this.secondTextBox.Name = "secondTextBox";
+            this.secondTextBox.Size = new System.Drawing.Size(36, 21);
+            this.secondTextBox.TabIndex = 4;
+            this.secondTextBox.TextChanged += new System.EventHandler(this.secondTextBox_TextChanged);
             // 
-            // label15
+            // minuteTextBox
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(486, 38);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(81, 12);
-            this.label15.TabIndex = 1;
-            this.label15.Text = "프레임 레이트";
+            this.minuteTextBox.Location = new System.Drawing.Point(76, 56);
+            this.minuteTextBox.Name = "minuteTextBox";
+            this.minuteTextBox.Size = new System.Drawing.Size(36, 21);
+            this.minuteTextBox.TabIndex = 3;
+            this.minuteTextBox.TextChanged += new System.EventHandler(this.minuteTextBox_TextChanged);
             // 
-            // label16
+            // hourTextBox
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(15, 140);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(109, 12);
-            this.label16.TabIndex = 1;
-            this.label16.Text = "저장할 이미지 경로";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.ForeColor = System.Drawing.Color.Red;
-            this.label17.Location = new System.Drawing.Point(130, 91);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(271, 12);
-            this.label17.TabIndex = 1;
-            this.label17.Text = "(기본기능에서 다운로드 클릭시 자동으로 설정됨)";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(15, 203);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(109, 12);
-            this.label18.TabIndex = 1;
-            this.label18.Text = "저장할 이미지 이름";
+            this.hourTextBox.Location = new System.Drawing.Point(17, 56);
+            this.hourTextBox.Name = "hourTextBox";
+            this.hourTextBox.Size = new System.Drawing.Size(35, 21);
+            this.hourTextBox.TabIndex = 2;
+            this.hourTextBox.TextChanged += new System.EventHandler(this.hourTextBox_TextChanged);
             // 
             // label19
             // 
@@ -370,122 +342,172 @@
             this.label19.TabIndex = 1;
             this.label19.Text = "(기본기능에서 다운로드 클릭시 자동으로 exe 실행 경로에서 저장할 영상 이름으로 폴더 만들어짐)";
             // 
-            // textBox1
+            // label17
             // 
-            this.textBox1.Location = new System.Drawing.Point(17, 56);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(35, 21);
-            this.textBox1.TabIndex = 2;
+            this.label17.AutoSize = true;
+            this.label17.ForeColor = System.Drawing.Color.Red;
+            this.label17.Location = new System.Drawing.Point(130, 91);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(271, 12);
+            this.label17.TabIndex = 1;
+            this.label17.Text = "(기본기능에서 다운로드 클릭시 자동으로 설정됨)";
             // 
-            // textBox2
+            // label15
             // 
-            this.textBox2.Location = new System.Drawing.Point(76, 56);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(36, 21);
-            this.textBox2.TabIndex = 3;
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(475, 40);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(81, 12);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "프레임 레이트";
             // 
-            // textBox3
+            // label13
             // 
-            this.textBox3.Location = new System.Drawing.Point(140, 56);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(36, 21);
-            this.textBox3.TabIndex = 4;
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(305, 40);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(57, 12);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "영상 길이";
             // 
-            // button1
+            // label18
             // 
-            this.button1.Location = new System.Drawing.Point(628, 56);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(119, 184);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "이미지 변환";
-            this.button1.UseVisualStyleBackColor = true;
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(15, 203);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(109, 12);
+            this.label18.TabIndex = 1;
+            this.label18.Text = "저장할 이미지 이름";
             // 
-            // numericUpDown1
+            // label16
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(488, 57);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(98, 21);
-            this.numericUpDown1.TabIndex = 6;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(15, 140);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(109, 12);
+            this.label16.TabIndex = 1;
+            this.label16.Text = "저장할 이미지 경로";
             // 
-            // textBox4
+            // label14
             // 
-            this.textBox4.Location = new System.Drawing.Point(38, 107);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(480, 21);
-            this.textBox4.TabIndex = 7;
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(15, 91);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(109, 12);
+            this.label14.TabIndex = 1;
+            this.label14.Text = "변환할 동영상 경로";
             // 
-            // button2
+            // label12
             // 
-            this.button2.Location = new System.Drawing.Point(525, 107);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(61, 23);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "찾기";
-            this.button2.UseVisualStyleBackColor = true;
+            this.label12.AutoSize = true;
+            this.label12.ForeColor = System.Drawing.Color.Maroon;
+            this.label12.Location = new System.Drawing.Point(305, 59);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(81, 12);
+            this.label12.TabIndex = 1;
+            this.label12.Text = "필요하면 개발";
             // 
-            // checkBox1
+            // label11
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(17, 110);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 14);
-            this.checkBox1.TabIndex = 9;
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(118, 65);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(16, 12);
+            this.label11.TabIndex = 1;
+            this.label11.Text = "m";
             // 
-            // textBox5
+            // label10
             // 
-            this.textBox5.Location = new System.Drawing.Point(38, 169);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(480, 21);
-            this.textBox5.TabIndex = 7;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(182, 65);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(12, 12);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "s";
             // 
-            // button3
+            // label9
             // 
-            this.button3.Location = new System.Drawing.Point(525, 169);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(61, 23);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "찾기";
-            this.button3.UseVisualStyleBackColor = true;
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(58, 65);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(12, 12);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "h";
             // 
-            // checkBox2
+            // label8
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(17, 172);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(15, 14);
-            this.checkBox2.TabIndex = 9;
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.Color.Red;
+            this.label8.Location = new System.Drawing.Point(74, 40);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(110, 12);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "(ex : 00h 00m 00s)";
             // 
-            // textBox6
+            // label6
             // 
-            this.textBox6.Location = new System.Drawing.Point(17, 219);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(569, 21);
-            this.textBox6.TabIndex = 10;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(0, 237);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(109, 12);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "고급기능 사용 여부";
+            // 
+            // yesRadioButton
+            // 
+            this.yesRadioButton.AutoSize = true;
+            this.yesRadioButton.Location = new System.Drawing.Point(140, 235);
+            this.yesRadioButton.Name = "yesRadioButton";
+            this.yesRadioButton.Size = new System.Drawing.Size(31, 16);
+            this.yesRadioButton.TabIndex = 6;
+            this.yesRadioButton.TabStop = true;
+            this.yesRadioButton.Text = "Y";
+            this.yesRadioButton.UseVisualStyleBackColor = true;
+            this.yesRadioButton.CheckedChanged += new System.EventHandler(this.yesRadioButton_CheckedChanged);
+            // 
+            // noRadioButton
+            // 
+            this.noRadioButton.AutoSize = true;
+            this.noRadioButton.Location = new System.Drawing.Point(177, 235);
+            this.noRadioButton.Name = "noRadioButton";
+            this.noRadioButton.Size = new System.Drawing.Size(32, 16);
+            this.noRadioButton.TabIndex = 7;
+            this.noRadioButton.TabStop = true;
+            this.noRadioButton.Text = "N";
+            this.noRadioButton.UseVisualStyleBackColor = true;
+            this.noRadioButton.CheckedChanged += new System.EventHandler(this.noRadioButton_CheckedChanged);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.ForeColor = System.Drawing.Color.Red;
+            this.label20.Location = new System.Drawing.Point(560, 40);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(26, 12);
+            this.label20.TabIndex = 11;
+            this.label20.Text = "1~5";
             // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 537);
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(780, 519);
             this.Controls.Add(this.noRadioButton);
             this.Controls.Add(this.yesRadioButton);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.advancedPannel);
+            this.MaximizeBox = false;
             this.Name = "mainForm";
             this.Text = "Youtube -> Image";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.mainForm_FormClosed);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.advancedPannel.ResumeLayout(false);
             this.advancedPannel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.frameRateUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -521,18 +543,19 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox secondTextBox;
+        private System.Windows.Forms.TextBox minuteTextBox;
+        private System.Windows.Forms.TextBox hourTextBox;
+        private System.Windows.Forms.Button changeImageButton;
+        private System.Windows.Forms.Button videoPathButton;
+        private System.Windows.Forms.TextBox videoPathTextBox;
+        private System.Windows.Forms.NumericUpDown frameRateUpDown;
+        private System.Windows.Forms.CheckBox saveImagePathCheckBox;
+        private System.Windows.Forms.CheckBox videoPathCheckBox;
+        private System.Windows.Forms.Button saveImagePathButton;
+        private System.Windows.Forms.TextBox saveImagePathTextBox;
+        private System.Windows.Forms.TextBox saveImageNameTextBox;
+        private System.Windows.Forms.Label label20;
     }
 }
 
