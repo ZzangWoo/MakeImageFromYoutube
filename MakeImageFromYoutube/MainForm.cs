@@ -382,6 +382,35 @@ namespace MakeImageFromYoutube
             else
             {
                 // Info File이 있는 경우에는 정보 불러와서 Info 클래스에 값 저장 후 컨트롤에 적용
+                info = log.GetInfoLog();
+
+                // 고급기능 초기화
+                if (info.checkedAdvanced)
+                {
+                    yesRadioButton.Checked = true;
+                }
+                else
+                {
+                    noRadioButton.Checked = true;
+                }
+
+                // 변환할 동영상 경로 체크박스 초기화
+                videoPathCheckBox.Checked = info.isCheckVideoPath;
+                videoPathTextBox.Enabled = info.isCheckVideoPath;
+                videoPathButton.Enabled = info.isCheckVideoPath;
+
+                // 저장할 이미지 경로 체크박스 초기화
+                saveImagePathCheckBox.Checked = info.isCheckSaveImagePath;
+                saveImagePathTextBox.Enabled = info.isCheckSaveImagePath;
+                saveImagePathButton.Enabled = info.isCheckSaveImagePath;
+
+                // 시작시간 초기화
+                hourTextBox.Text = info.hour;
+                minuteTextBox.Text = info.minute;
+                secondTextBox.Text = info.second;
+
+                // 프레임 레이트 초기화
+                frameRateUpDown.Value = info.frameRate;
             }
         }
 

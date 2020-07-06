@@ -38,7 +38,7 @@ namespace MakeImageFromYoutube
         /// <summary>
         /// 프레임 레이트 값
         /// </summary>
-        public decimal frameRate { get; set; } = 6;
+        public decimal frameRate { get; set; } = 1;
 
         /// <summary>
         /// 변환할 동영상 경로 체크박스 체크 여부
