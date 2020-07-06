@@ -41,6 +41,9 @@ namespace MakeImageFromYoutube
         /// </summary>
         public Log log;
 
+        private const int VIDEO_CONVERT_TO_IMAGES = 0;
+        private const int ONLY_CONTVERT_TO_IMAGES = 1;
+
         #endregion
 
         #region # Constructor
@@ -61,6 +64,8 @@ namespace MakeImageFromYoutube
         #endregion
 
         #region # Event
+
+        #region ## Button
 
         /// <summary>
         /// 영상 저장할 경로 선택 이벤트
@@ -136,30 +141,50 @@ namespace MakeImageFromYoutube
         }
 
         /// <summary>
-        /// Y 라디오버튼 클릭
+        /// 변환할 동영상 경로 선택 이벤트
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void yesRadioButton_CheckedChanged(object sender, EventArgs e)
+        private void videoPathButton_Click(object sender, EventArgs e)
         {
-            info.checkedAdvanced = true;
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.IsFolderPicker = true;
 
-            // 고급기능 패널 활성화
-            advancedPannel.Visible = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                videoPathTextBox.Text = dialog.FileName;
+            }
         }
 
         /// <summary>
-        /// N 라디오버튼 클릭
+        /// 저장할 이미지 경로 선택 이벤트
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void noRadioButton_CheckedChanged(object sender, EventArgs e)
+        private void saveImagePathButton_Click(object sender, EventArgs e)
         {
-            info.checkedAdvanced = false;
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.IsFolderPicker = true;
 
-            // 고급기능 패널 비활성화
-            advancedPannel.Visible = false;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                saveImagePathTextBox.Text = dialog.FileName;
+            }
         }
+
+        /// <summary>
+        /// 이미지 변환 버튼 클릭 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void changeImageButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        #region ## TextBox
 
         /// <summary>
         /// 고급기능 -> 시 변경 이벤트
@@ -197,7 +222,7 @@ namespace MakeImageFromYoutube
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void frameRateUpDown_ValueChanged(object sender, EventArgs e)
-        {   
+        {
             if (frameRateUpDown.Value < 1)
             {
                 MessageBox.Show("프레임 레이트를 0으로 설정하면 이미지 변환이 어려울 수 있습니다.");
@@ -213,6 +238,38 @@ namespace MakeImageFromYoutube
                 info.frameRate = frameRateUpDown.Value;
             }
         }
+
+        #endregion
+
+        #region ## CheckBox & RadioButton
+
+        /// <summary>
+        /// Y 라디오버튼 클릭
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void yesRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            info.checkedAdvanced = true;
+
+            // 고급기능 패널 활성화
+            advancedPannel.Visible = true;
+        }
+
+        /// <summary>
+        /// N 라디오버튼 클릭
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void noRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            info.checkedAdvanced = false;
+
+            // 고급기능 패널 비활성화
+            advancedPannel.Visible = false;
+        }
+
+
 
         /// <summary>
         /// 변환할 동영상 경로 체크박스 변화 이벤트
@@ -256,6 +313,10 @@ namespace MakeImageFromYoutube
             }
         }
 
+        #endregion
+
+        #region ## Form
+
         /// <summary>
         /// 폼 종료 후 이벤트
         /// </summary>
@@ -266,6 +327,8 @@ namespace MakeImageFromYoutube
             // 기입정보 저장
             log.CreateInfoLog(info);
         }
+
+        #endregion
 
         #endregion
 
@@ -341,8 +404,8 @@ namespace MakeImageFromYoutube
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "에러발생");
-                // 오류 로그 추가
+                MessageBox.Show("유튜브 영상을 다운받는 중 에러가 발생했습니다.", "에러발생");
+                log.WriteLog("[ERROR] : " + ex);
             }
         }
 
@@ -414,6 +477,23 @@ namespace MakeImageFromYoutube
             }
         }
 
+        private void ConvertToImages(int type)
+        {
+            // Youtube 다운 + 이미지 변환
+            if (type == VIDEO_CONVERT_TO_IMAGES)
+            {
+
+            }
+            // 원래 있던 영상을 이미지 변환만
+            else if (type == ONLY_CONTVERT_TO_IMAGES)
+            {
+
+            }
+        }
+
+
         #endregion
+
+        
     }
 }

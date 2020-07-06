@@ -41,6 +41,7 @@
             this.storageLocationTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.advancedPannel = new System.Windows.Forms.Panel();
+            this.label20 = new System.Windows.Forms.Label();
             this.saveImageNameTextBox = new System.Windows.Forms.TextBox();
             this.saveImagePathCheckBox = new System.Windows.Forms.CheckBox();
             this.videoPathCheckBox = new System.Windows.Forms.CheckBox();
@@ -68,7 +69,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.yesRadioButton = new System.Windows.Forms.RadioButton();
             this.noRadioButton = new System.Windows.Forms.RadioButton();
-            this.label20 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.advancedPannel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frameRateUpDown)).BeginInit();
@@ -227,6 +227,16 @@
             this.advancedPannel.Size = new System.Drawing.Size(774, 257);
             this.advancedPannel.TabIndex = 3;
             // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.ForeColor = System.Drawing.Color.Red;
+            this.label20.Location = new System.Drawing.Point(560, 40);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(26, 12);
+            this.label20.TabIndex = 11;
+            this.label20.Text = "1~5";
+            // 
             // saveImageNameTextBox
             // 
             this.saveImageNameTextBox.Location = new System.Drawing.Point(17, 219);
@@ -262,6 +272,7 @@
             this.saveImagePathButton.TabIndex = 8;
             this.saveImagePathButton.Text = "찾기";
             this.saveImagePathButton.UseVisualStyleBackColor = true;
+            this.saveImagePathButton.Click += new System.EventHandler(this.saveImagePathButton_Click);
             // 
             // videoPathButton
             // 
@@ -271,6 +282,7 @@
             this.videoPathButton.TabIndex = 8;
             this.videoPathButton.Text = "찾기";
             this.videoPathButton.UseVisualStyleBackColor = true;
+            this.videoPathButton.Click += new System.EventHandler(this.videoPathButton_Click);
             // 
             // saveImagePathTextBox
             // 
@@ -307,6 +319,7 @@
             this.changeImageButton.TabIndex = 5;
             this.changeImageButton.Text = "이미지 변환";
             this.changeImageButton.UseVisualStyleBackColor = true;
+            this.changeImageButton.Click += new System.EventHandler(this.changeImageButton_Click);
             // 
             // secondTextBox
             // 
@@ -476,16 +489,6 @@
             this.noRadioButton.Text = "N";
             this.noRadioButton.UseVisualStyleBackColor = true;
             this.noRadioButton.CheckedChanged += new System.EventHandler(this.noRadioButton_CheckedChanged);
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.ForeColor = System.Drawing.Color.Red;
-            this.label20.Location = new System.Drawing.Point(560, 40);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(26, 12);
-            this.label20.TabIndex = 11;
-            this.label20.Text = "1~5";
             // 
             // mainForm
             // 
