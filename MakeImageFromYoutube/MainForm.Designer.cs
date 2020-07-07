@@ -323,27 +323,36 @@
             // 
             // secondTextBox
             // 
+            this.secondTextBox.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.secondTextBox.Location = new System.Drawing.Point(140, 56);
+            this.secondTextBox.MaxLength = 2;
             this.secondTextBox.Name = "secondTextBox";
             this.secondTextBox.Size = new System.Drawing.Size(36, 21);
             this.secondTextBox.TabIndex = 4;
             this.secondTextBox.TextChanged += new System.EventHandler(this.secondTextBox_TextChanged);
+            this.secondTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.secondTextBox_KeyPress);
             // 
             // minuteTextBox
             // 
+            this.minuteTextBox.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.minuteTextBox.Location = new System.Drawing.Point(76, 56);
+            this.minuteTextBox.MaxLength = 2;
             this.minuteTextBox.Name = "minuteTextBox";
             this.minuteTextBox.Size = new System.Drawing.Size(36, 21);
             this.minuteTextBox.TabIndex = 3;
             this.minuteTextBox.TextChanged += new System.EventHandler(this.minuteTextBox_TextChanged);
+            this.minuteTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.minutTextBox_KeyPress);
             // 
             // hourTextBox
             // 
+            this.hourTextBox.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.hourTextBox.Location = new System.Drawing.Point(17, 56);
+            this.hourTextBox.MaxLength = 2;
             this.hourTextBox.Name = "hourTextBox";
             this.hourTextBox.Size = new System.Drawing.Size(35, 21);
             this.hourTextBox.TabIndex = 2;
             this.hourTextBox.TextChanged += new System.EventHandler(this.hourTextBox_TextChanged);
+            this.hourTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.hourTextBox_KeyPress);
             // 
             // label19
             // 

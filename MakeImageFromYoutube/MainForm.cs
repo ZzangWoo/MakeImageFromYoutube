@@ -217,6 +217,78 @@ namespace MakeImageFromYoutube
         }
 
         /// <summary>
+        /// 시 텍스트 박스에서 키보드 눌렀을 때 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void hourTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //숫자만 입력되도록 필터링
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back)))    //숫자와 백스페이스를 제외한 나머지를 바로 처리
+            {
+                e.Handled = true;
+                MessageBox.Show("숫자만 입력할 수 있습니다.", "경고");
+            }
+            // 숫자 개수 제한 (2개)
+        }
+
+        /// <summary>
+        /// 분 텍스트 박스에서 키보드 눌렀을 때 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void minutTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string minute = string.Empty;
+
+            //숫자만 입력되도록 필터링
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back)))    //숫자와 백스페이스를 제외한 나머지를 바로 처리
+            {
+                e.Handled = true;
+                MessageBox.Show("숫자만 입력할 수 있습니다.", "경고");
+            }
+            else if (char.IsDigit(e.KeyChar))
+            {
+                minute = minuteTextBox.Text + e.KeyChar;
+
+                // 60분 이상 입력 제한
+                if (Convert.ToInt32(minute) >= 60)
+                {
+                    e.Handled = true;
+                    MessageBox.Show("60분 이상 입력 불가합니다.", "경고");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 초 텍스트 박스에서 키보드 눌렀을 때 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void secondTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string second = string.Empty;
+
+            //숫자만 입력되도록 필터링
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back)))    //숫자와 백스페이스를 제외한 나머지를 바로 처리
+            {
+                e.Handled = true;
+                MessageBox.Show("숫자만 입력할 수 있습니다.", "경고");
+            }
+            else if (char.IsDigit(e.KeyChar))
+            {
+                second = secondTextBox.Text + e.KeyChar;
+
+                // 60분 이상 입력 제한
+                if (Convert.ToInt32(second) >= 60)
+                {
+                    e.Handled = true;
+                    MessageBox.Show("60초 이상 입력 불가합니다.", "경고");
+                }
+            }
+        }
+
+        /// <summary>
         /// Frame Rate 값 변화 이벤트
         /// </summary>
         /// <param name="sender"></param>
@@ -366,6 +438,7 @@ namespace MakeImageFromYoutube
                 string exePath = Application.StartupPath + @"\ffmpeg\bin\youtube-dl";
                 string savedVideoName = storageLocationTextBox.Text + @"\" + savedVideoFileNameTextBox.Text;
                 string command = exePath + " -o " + savedVideoName + " " + youtubeURLTextBox.Text;
+                //string command = exePath + " -o " + savedVideoName + " .%(ext)s -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio' --merge-output-format mp4 " + youtubeURLTextBox.Text;
 
                 // Youtube 영상 저장경로 저장 (자동 불러오기 위해서)
                 info.savedVideoPath = storageLocationTextBox.Text;
@@ -490,6 +563,7 @@ namespace MakeImageFromYoutube
 
             }
         }
+
 
 
         #endregion
