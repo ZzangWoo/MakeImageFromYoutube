@@ -191,9 +191,17 @@ namespace MakeImageFromYoutube
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void hourTextBox_TextChanged(object sender, EventArgs e)
+        private void hourTextBox_Leave(object sender, EventArgs e)
         {
-            info.hour = hourTextBox.Text;
+            if (hourTextBox.Text.Length < 2)
+            {
+                MessageBox.Show("00h 형태로 입력해주세요.", "경고");
+                hourTextBox.Focus();
+            }
+            else
+            {
+                info.hour = hourTextBox.Text;
+            }
         }
 
         /// <summary>
@@ -201,9 +209,17 @@ namespace MakeImageFromYoutube
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void minuteTextBox_TextChanged(object sender, EventArgs e)
+        private void minuteTextBox_Leave(object sender, EventArgs e)
         {
-            info.minute = minuteTextBox.Text;
+            if (minuteTextBox.Text.Length < 2)
+            {
+                MessageBox.Show("00m 형태로 입력해주세요.", "경고");
+                minuteTextBox.Focus();
+            }
+            else
+            {
+                info.hour = minuteTextBox.Text;
+            }
         }
 
         /// <summary>
@@ -211,9 +227,17 @@ namespace MakeImageFromYoutube
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void secondTextBox_TextChanged(object sender, EventArgs e)
+        private void secondTextBox_Leave(object sender, EventArgs e)
         {
-            info.second = secondTextBox.Text;
+            if (secondTextBox.Text.Length < 2)
+            {
+                MessageBox.Show("00s 형태로 입력해주세요.", "경고");
+                secondTextBox.Focus();
+            }
+            else
+            {
+                info.hour = secondTextBox.Text;
+            }
         }
 
         /// <summary>
@@ -564,10 +588,7 @@ namespace MakeImageFromYoutube
             }
         }
 
-
-
         #endregion
 
-        
     }
 }

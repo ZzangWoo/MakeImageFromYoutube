@@ -329,8 +329,8 @@
             this.secondTextBox.Name = "secondTextBox";
             this.secondTextBox.Size = new System.Drawing.Size(36, 21);
             this.secondTextBox.TabIndex = 4;
-            this.secondTextBox.TextChanged += new System.EventHandler(this.secondTextBox_TextChanged);
             this.secondTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.secondTextBox_KeyPress);
+            this.secondTextBox.Leave += new System.EventHandler(this.secondTextBox_Leave);
             // 
             // minuteTextBox
             // 
@@ -340,8 +340,8 @@
             this.minuteTextBox.Name = "minuteTextBox";
             this.minuteTextBox.Size = new System.Drawing.Size(36, 21);
             this.minuteTextBox.TabIndex = 3;
-            this.minuteTextBox.TextChanged += new System.EventHandler(this.minuteTextBox_TextChanged);
             this.minuteTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.minutTextBox_KeyPress);
+            this.minuteTextBox.Leave += new System.EventHandler(this.minuteTextBox_Leave);
             // 
             // hourTextBox
             // 
@@ -351,8 +351,8 @@
             this.hourTextBox.Name = "hourTextBox";
             this.hourTextBox.Size = new System.Drawing.Size(35, 21);
             this.hourTextBox.TabIndex = 2;
-            this.hourTextBox.TextChanged += new System.EventHandler(this.hourTextBox_TextChanged);
             this.hourTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.hourTextBox_KeyPress);
+            this.hourTextBox.Leave += new System.EventHandler(this.hourTextBox_Leave);
             // 
             // label19
             // 
