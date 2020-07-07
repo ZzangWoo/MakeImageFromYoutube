@@ -461,8 +461,8 @@ namespace MakeImageFromYoutube
                 // 경로 저장
                 string exePath = Application.StartupPath + @"\ffmpeg\bin\youtube-dl";
                 string savedVideoName = storageLocationTextBox.Text + @"\" + savedVideoFileNameTextBox.Text;
-                string command = exePath + " -o " + savedVideoName + " " + youtubeURLTextBox.Text;
-                //string command = exePath + " -o " + savedVideoName + " .%(ext)s -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio' --merge-output-format mp4 " + youtubeURLTextBox.Text;
+                //string command = exePath + " -o " + savedVideoName + " " + youtubeURLTextBox.Text;
+                string command = exePath + " -o " + savedVideoName + " -f bestvideo+bestaudio --merge-output-format mkv " + youtubeURLTextBox.Text;
 
                 // Youtube 영상 저장경로 저장 (자동 불러오기 위해서)
                 info.savedVideoPath = storageLocationTextBox.Text;
