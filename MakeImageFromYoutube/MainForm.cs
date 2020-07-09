@@ -1,4 +1,5 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using NReco.VideoInfo;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -128,8 +129,18 @@ namespace MakeImageFromYoutube
                         // 고급기능 사용 O
                         if (info.checkedAdvanced)
                         {
-                            DownloadYoutubeVideo();
-                            ConvertToImages(VIDEO_CONVERT_TO_IMAGES);
+                            // 저장할 이미지 이름이 빈 칸인지 확인
+                            if (string.IsNullOrEmpty(saveImageNameTextBox.Text))
+                            {
+                                MessageBox.Show("저장할 이미지 이름을 입력해주세요", "경고");
+                                saveImageNameTextBox.Focus();
+                            }
+                            else
+                            {
+                                DownloadYoutubeVideo();
+                                ConvertToImages(VIDEO_CONVERT_TO_IMAGES);
+                                MessageBox.Show("이미지 변환 성공", "알림");
+                            }
                         }
                         // 고급기능 사용 X
                         else
@@ -533,41 +544,116 @@ namespace MakeImageFromYoutube
             // Youtube 다운 + 이미지 변환
             if (type == VIDEO_CONVERT_TO_IMAGES)
             {
-                DirectoryInfo saveImageDI;
-                //= new DirectoryInfo(info.isCheckSaveImagePath == true ? saveImagePathTextBox.Text : Application.StartupPath);
+                // 이미지로 변환할 영상 재생시간 + 시작시간 초로
+                string videoPath = storageLocationTextBox.Text + @"\" + savedVideoFileNameTextBox.Text + ".mkv";
+                FFProbe ffProbe;
+                double videoDuration;
+                double startTimeDuration;
 
-                #region 예외처리
-
-                // 저장할 이미지 이름이 빈 칸인지 확인
-                if (string.IsNullOrEmpty(saveImageNameTextBox.Text))
+                // 영상있는지 확인
+                if (IsExistFile(videoPath))
                 {
-                    MessageBox.Show("저장할 이미지 이름을 입력해주세요", "경고");
-                    saveImageNameTextBox.Focus();
+                    ffProbe = new FFProbe();
+                    var videoInfo = ffProbe.GetMediaInfo(videoPath);
+                    videoDuration = Math.Floor(videoInfo.Duration.TotalSeconds); // 소수점이 나오는 경우가 있다해서 버림 사용
+
+                    // 시작시간 초로 계산
+                    startTimeDuration = (Convert.ToDouble(hourTextBox.Text) * 60 * 60) + (Convert.ToDouble(hourTextBox.Text) * 60) + Convert.ToDouble(hourTextBox.Text);
                 }
+                else
+                {
+                    MessageBox.Show("이미지로 변환할 영상이 존재하지 않습니다. 로그를 확인해주세요.", "오류");
+                    return;
+                }
+
                 // 저장할 이미지 이름에 띄어쓰기가 있는지 확인
-                else if (CheckWhiteSpaceInPath(saveImageNameTextBox.Text).Count > 0)
+                if (CheckWhiteSpaceInPath(saveImageNameTextBox.Text).Count > 0)
                 {
                     MessageBox.Show("저장할 이미지 이름에 띄어쓰기가 있으면 안됩니다.", "경고");
                     saveImageNameTextBox.Focus();
                 }
-                // 저장할 이미지 경로 선택 시 예외처리
-                else if (info.isCheckSaveImagePath)
+                // 이미지로 변환할 영상 길이와 시작시간 비교
+                else if (startTimeDuration >= videoDuration)
                 {
-                    // 저장할 이미지 경로 빈 칸인지 확인
-                    if (string.IsNullOrEmpty(saveImagePathTextBox.Text))
+                    MessageBox.Show("이미지로 변환할 영상의 길이보다 시작시간이 더 큽니다.", "경고");
+                    hourTextBox.Focus();
+                }
+                // 저장할 이미지 경로 빈 칸인지 확인
+                else if (info.isCheckSaveImagePath && string.IsNullOrEmpty(saveImagePathTextBox.Text))
+                {
+                    MessageBox.Show("저장할 이미지 경로를 입력해주세요", "경고");
+                    saveImagePathTextBox.Focus();
+                }
+                // 저장할 이미지 경로에 띄어쓰기 있는지 확인
+                else if (info.isCheckSaveImagePath && CheckWhiteSpaceInPath(saveImagePathTextBox.Text).Count > 0)
+                {
+                    MessageBox.Show("저장할 이미지 경로에 띄어쓰기가 있으면 안됩니다.", "경고");
+                    saveImagePathTextBox.Focus();
+                }
+                // 저장할 이미지 경로 유무 확인
+                else if (info.isCheckSaveImagePath && !IsExistDirectory(saveImagePathTextBox.Text))
+                {
+                    MessageBox.Show("저장할 이미지 경로가 없습니다. 다시 확인해주세요.", "경고");
+                    saveImagePathTextBox.Focus();
+                }
+                
+                // 예외처리 끝
+                else
+                {
+                    try
                     {
-                        MessageBox.Show("저장할 이미지 경로를 입력해주세요", "경고");
-                        saveImagePathTextBox.Focus();
+                        // 체크박스 체크 여부에 따라서 이미지 저장 경로 저장
+                        string saveImagePath = info.isCheckSaveImagePath == true ? saveImagePathTextBox.Text : Application.StartupPath + @"\" + savedVideoFileNameTextBox.Text;
+                        saveImagePath = saveImagePath + @"\" + savedVideoFileNameTextBox.Text;
+                        // 이미지 저장할 폴더 생성
+                        DirectoryInfo di = new DirectoryInfo(saveImagePath);
+                        if (!di.Exists)
+                        {
+                            di.Create();
+                        }
+
+                        saveImagePath = saveImagePath + @"\" + saveImageNameTextBox.Text;
+
+                        string startTime = hourTextBox.Text + ":" + minuteTextBox.Text + ":" + secondTextBox.Text + ".00";
+                        string ffmpegPath = Application.StartupPath + @"\ffmpeg\bin\ffmpeg";
+                        string command = ffmpegPath + " -ss " + startTime + " -i " + videoPath + " -r " + frameRateUpDown.Text + " " + saveImagePath + "_%05d.jpg";
+
+                        ProcessStartInfo pri = new ProcessStartInfo();
+                        Process pro = new Process();
+
+                        // 실행할 파일명 입력
+                        pri.FileName = "cmd.exe";
+
+                        // cmd 창 띄우기
+                        pri.CreateNoWindow = false; // false -> 띄우기, true -> 안 띄우기
+                        pri.UseShellExecute = false;
+
+                        pri.RedirectStandardInput = true;
+                        pri.RedirectStandardOutput = true;
+                        pri.RedirectStandardError = true;
+
+                        pro.StartInfo = pri;
+                        pro.Start();
+
+                        // 명령어 실행
+                        pro.StandardInput.Write(command + Environment.NewLine);
+                        pro.StandardInput.Close();
+
+                        
+                        //string result = pro.StandardOutput.ReadToEnd();
+
+                        pro.WaitForExit();
+                        pro.Close();
+
+                        // 다운로드 로그 저장
+                        //log.WriteLog(result);
                     }
-                    // 저장할 이미지 경로에 띄어쓰기 있는지 확인
-                    else if (CheckWhiteSpaceInPath(saveImagePathTextBox.Text).Count > 0)
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("저장할 이미지 경로에 띄어쓰기가 있으면 안됩니다.", "경고");
-                        saveImagePathTextBox.Focus();
+                        MessageBox.Show("이미지 변환 중 에러가 발생했습니다.", "에러");
+                        log.WriteLog("[ERROR] : " + ex);
                     }
                 }
-
-                #endregion
             }
             // 원래 있던 영상을 이미지 변환만
             else if (type == ONLY_CONTVERT_TO_IMAGES)
@@ -642,6 +728,28 @@ namespace MakeImageFromYoutube
                 // 프레임 레이트 초기화
                 frameRateUpDown.Value = info.frameRate;
             }
+        }
+
+        /// <summary>
+        /// 파일 유무 판별 메서드
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        private bool IsExistFile(string path)
+        {
+            FileInfo fileInfo = new FileInfo(path);
+            return fileInfo.Exists ? true : false;
+        }
+
+        /// <summary>
+        /// 폴더 유무 판별 메서드
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        private bool IsExistDirectory(string path)
+        {
+            DirectoryInfo directoryInfo = new DirectoryInfo(path);
+            return directoryInfo.Exists ? true : false;
         }
 
         #endregion
