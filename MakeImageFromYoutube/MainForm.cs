@@ -128,12 +128,14 @@ namespace MakeImageFromYoutube
                         // 고급기능 사용 O
                         if (info.checkedAdvanced)
                         {
-                            MessageBox.Show("고급기능 개발중");
+                            DownloadYoutubeVideo();
+                            ConvertToImages(VIDEO_CONVERT_TO_IMAGES);
                         }
                         // 고급기능 사용 X
                         else
                         {
                             DownloadYoutubeVideo();
+                            MessageBox.Show("유튜브 영상 다운 성공", "알림");
                         }
                     }
                 }
@@ -179,7 +181,7 @@ namespace MakeImageFromYoutube
         /// <param name="e"></param>
         private void changeImageButton_Click(object sender, EventArgs e)
         {
-
+            ConvertToImages(ONLY_CONTVERT_TO_IMAGES);
         }
 
         #endregion
@@ -323,15 +325,33 @@ namespace MakeImageFromYoutube
             {
                 MessageBox.Show("프레임 레이트를 0으로 설정하면 이미지 변환이 어려울 수 있습니다.");
                 frameRateUpDown.Value = 0;
+                frameRateUpDown.Focus();
             }
             else if (frameRateUpDown.Value > 5)
             {
                 MessageBox.Show("프레임 레이트는 5가 넘을 필요가 없습니다.");
                 frameRateUpDown.Value = 5;
+                frameRateUpDown.Focus();
             }
             else
             {
                 info.frameRate = frameRateUpDown.Value;
+            }
+        }
+
+        /// <summary>
+        /// 프레임 레이트에 빈칸이 들어가는 경우 예외처리 하기 위해 만든 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void frameRateUpDown_Validated(object sender, EventArgs e)
+        {
+            var value = sender as NumericUpDown;
+
+            if (string.IsNullOrEmpty(value.Text))
+            {
+                MessageBox.Show("프레임 레이트에 값을 입력해주세요", "경고");
+                frameRateUpDown.Focus();
             }
         }
 
@@ -496,13 +516,63 @@ namespace MakeImageFromYoutube
 
                 pro.WaitForExit();
                 pro.Close();
-
-                MessageBox.Show("유튜브 영상 다운 성공");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("유튜브 영상을 다운받는 중 에러가 발생했습니다.", "에러발생");
                 log.WriteLog("[ERROR] : " + ex);
+            }
+        }
+
+        /// <summary>
+        /// 이미지 변환 메서드
+        /// </summary>
+        /// <param name="type"></param>
+        private void ConvertToImages(int type)
+        {
+            // Youtube 다운 + 이미지 변환
+            if (type == VIDEO_CONVERT_TO_IMAGES)
+            {
+                DirectoryInfo saveImageDI;
+                //= new DirectoryInfo(info.isCheckSaveImagePath == true ? saveImagePathTextBox.Text : Application.StartupPath);
+
+                #region 예외처리
+
+                // 저장할 이미지 이름이 빈 칸인지 확인
+                if (string.IsNullOrEmpty(saveImageNameTextBox.Text))
+                {
+                    MessageBox.Show("저장할 이미지 이름을 입력해주세요", "경고");
+                    saveImageNameTextBox.Focus();
+                }
+                // 저장할 이미지 이름에 띄어쓰기가 있는지 확인
+                else if (CheckWhiteSpaceInPath(saveImageNameTextBox.Text).Count > 0)
+                {
+                    MessageBox.Show("저장할 이미지 이름에 띄어쓰기가 있으면 안됩니다.", "경고");
+                    saveImageNameTextBox.Focus();
+                }
+                // 저장할 이미지 경로 선택 시 예외처리
+                else if (info.isCheckSaveImagePath)
+                {
+                    // 저장할 이미지 경로 빈 칸인지 확인
+                    if (string.IsNullOrEmpty(saveImagePathTextBox.Text))
+                    {
+                        MessageBox.Show("저장할 이미지 경로를 입력해주세요", "경고");
+                        saveImagePathTextBox.Focus();
+                    }
+                    // 저장할 이미지 경로에 띄어쓰기 있는지 확인
+                    else if (CheckWhiteSpaceInPath(saveImagePathTextBox.Text).Count > 0)
+                    {
+                        MessageBox.Show("저장할 이미지 경로에 띄어쓰기가 있으면 안됩니다.", "경고");
+                        saveImagePathTextBox.Focus();
+                    }
+                }
+
+                #endregion
+            }
+            // 원래 있던 영상을 이미지 변환만
+            else if (type == ONLY_CONTVERT_TO_IMAGES)
+            {
+
             }
         }
 
@@ -574,21 +644,8 @@ namespace MakeImageFromYoutube
             }
         }
 
-        private void ConvertToImages(int type)
-        {
-            // Youtube 다운 + 이미지 변환
-            if (type == VIDEO_CONVERT_TO_IMAGES)
-            {
-
-            }
-            // 원래 있던 영상을 이미지 변환만
-            else if (type == ONLY_CONTVERT_TO_IMAGES)
-            {
-
-            }
-        }
-
         #endregion
 
+        
     }
 }

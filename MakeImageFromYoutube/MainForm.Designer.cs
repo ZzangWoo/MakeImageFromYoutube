@@ -310,6 +310,7 @@
             0,
             0});
             this.frameRateUpDown.ValueChanged += new System.EventHandler(this.frameRateUpDown_ValueChanged);
+            this.frameRateUpDown.Validated += new System.EventHandler(this.frameRateUpDown_Validated);
             // 
             // changeImageButton
             // 
