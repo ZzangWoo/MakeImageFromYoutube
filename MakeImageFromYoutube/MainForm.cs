@@ -161,7 +161,6 @@ namespace MakeImageFromYoutube
         private void videoPathButton_Click(object sender, EventArgs e)
         {
             CommonOpenFileDialog dialog = new CommonOpenFileDialog();
-            dialog.IsFolderPicker = true;
 
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
@@ -210,11 +209,11 @@ namespace MakeImageFromYoutube
                 MessageBox.Show("저장할 이미지 경로를 입력해주세요.", "경고");
                 saveImagePathTextBox.Focus();
             }
-            else if (!IsExistDirectory(videoPathTextBox.Text))
-            {
-                MessageBox.Show("유효하지 않은 변환할 동영상 경로입니다.", "경고");
-                videoPathTextBox.Focus();
-            }
+            //else if (!IsExistDirectory(videoPathTextBox.Text))
+            //{
+            //    MessageBox.Show("유효하지 않은 변환할 동영상 경로입니다.", "경고");
+            //    videoPathTextBox.Focus();
+            //}
             else if (!IsExistDirectory(saveImagePathTextBox.Text))
             {
                 MessageBox.Show("유효하지 않은 저장할 이미지 경로입니다.", "경고");
@@ -242,7 +241,37 @@ namespace MakeImageFromYoutube
             }
             else
             {
-                ConvertToImages(ONLY_CONTVERT_TO_IMAGES);
+                // 이미지로 변환할 영상 재생시간 + 시작시간 초로
+                string videoPath = videoPathTextBox.Text;
+                FFProbe ffProbe;
+                double videoDuration;
+                double startTimeDuration;
+
+                // 영상있는지 확인
+                if (IsExistFile(videoPath))
+                {
+                    ffProbe = new FFProbe();
+                    var videoInfo = ffProbe.GetMediaInfo(videoPath);
+                    videoDuration = Math.Floor(videoInfo.Duration.TotalSeconds); // 소수점이 나오는 경우가 있다해서 버림 사용
+
+                    // 시작시간 초로 계산
+                    startTimeDuration = (Convert.ToDouble(hourTextBox.Text) * 60 * 60) + (Convert.ToDouble(minuteTextBox.Text) * 60) + Convert.ToDouble(secondTextBox.Text);
+                }
+                else
+                {
+                    MessageBox.Show("이미지로 변환할 영상이 존재하지 않습니다. 로그를 확인해주세요.", "경고");
+                    return;
+                }
+
+                if (startTimeDuration >= videoDuration)
+                {
+                    MessageBox.Show("이미지로 변환할 영상의 길이보다 시작시간이 더 큽니다.", "경고");
+                    hourTextBox.Focus();
+                }
+                else
+                {
+                    ConvertToImages(ONLY_CONTVERT_TO_IMAGES);
+                }
             }
         }
 
@@ -727,9 +756,7 @@ namespace MakeImageFromYoutube
             {
                 try
                 {
-                    // 체크박스 체크 여부에 따라서 이미지 저장 경로 저장
-                    string saveImagePath = info.isCheckSaveImagePath == true ? saveImagePathTextBox.Text : Application.StartupPath + @"\" + savedVideoFileNameTextBox.Text;
-                    saveImagePath = saveImagePath + @"\" + savedVideoFileNameTextBox.Text;
+                    string saveImagePath = saveImagePathTextBox.Text + @"\" + saveImageNameTextBox.Text;
                     // 이미지 저장할 폴더 생성
                     DirectoryInfo di = new DirectoryInfo(saveImagePath);
                     if (!di.Exists)
@@ -758,6 +785,8 @@ namespace MakeImageFromYoutube
                     {
                         process.WaitForExit();
                     }
+
+                    MessageBox.Show("이미지 변환 성공", "알림");
                 }
                 catch (Exception ex)
                 {
