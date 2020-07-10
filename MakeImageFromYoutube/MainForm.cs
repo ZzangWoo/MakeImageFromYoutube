@@ -192,7 +192,58 @@ namespace MakeImageFromYoutube
         /// <param name="e"></param>
         private void changeImageButton_Click(object sender, EventArgs e)
         {
-            ConvertToImages(ONLY_CONTVERT_TO_IMAGES);
+            if (!videoPathCheckBox.Checked)
+            {
+                MessageBox.Show("변환할 동영상 경로의 체크박스를 선택해주세요.", "경고");
+            }
+            else if (string.IsNullOrEmpty(videoPathTextBox.Text))
+            {
+                MessageBox.Show("변환할 동영상 경로를 입력해주세요.", "경고");
+                videoPathTextBox.Focus();
+            }
+            else if (!saveImagePathCheckBox.Checked)
+            {
+                MessageBox.Show("저장할 이미지 경로의 체크박스를 선택해주세요.", "경고");
+            }
+            else if (string.IsNullOrEmpty(saveImagePathTextBox.Text))
+            {
+                MessageBox.Show("저장할 이미지 경로를 입력해주세요.", "경고");
+                saveImagePathTextBox.Focus();
+            }
+            else if (!IsExistDirectory(videoPathTextBox.Text))
+            {
+                MessageBox.Show("유효하지 않은 변환할 동영상 경로입니다.", "경고");
+                videoPathTextBox.Focus();
+            }
+            else if (!IsExistDirectory(saveImagePathTextBox.Text))
+            {
+                MessageBox.Show("유효하지 않은 저장할 이미지 경로입니다.", "경고");
+                saveImagePathTextBox.Focus();
+            }
+            else if (CheckWhiteSpaceInPath(videoPathTextBox.Text).Count > 0)
+            {
+                MessageBox.Show("변환할 동영상 경로에 띄어쓰기가 있으면 이미지 변환을 할 수 없습니다.", "경고");
+                videoPathTextBox.Focus();
+            } 
+            else if (CheckWhiteSpaceInPath(saveImagePathTextBox.Text).Count > 0)
+            {
+                MessageBox.Show("저장할 이미지 경로에 띄어쓰기가 있으면 이미지 변환을 할 수 없습니다.", "경고");
+                saveImagePathTextBox.Focus();
+            }
+            else if (string.IsNullOrEmpty(saveImageNameTextBox.Text))
+            {
+                MessageBox.Show("저장할 이미지 이름을 입력해주세요.", "경고");
+                saveImageNameTextBox.Focus();
+            }
+            else if (CheckWhiteSpaceInPath(saveImageNameTextBox.Text).Count > 0)
+            {
+                MessageBox.Show("저장할 이미지 이름에 띄어쓰기가 있으면 이미지 변환을 할 수 없습니다.", "경고");
+                saveImageNameTextBox.Focus();
+            }
+            else
+            {
+                ConvertToImages(ONLY_CONTVERT_TO_IMAGES);
+            }
         }
 
         #endregion
@@ -231,7 +282,7 @@ namespace MakeImageFromYoutube
             }
             else
             {
-                info.hour = minuteTextBox.Text;
+                info.minute = minuteTextBox.Text;
             }
         }
 
@@ -249,7 +300,7 @@ namespace MakeImageFromYoutube
             }
             else
             {
-                info.hour = secondTextBox.Text;
+                info.second = secondTextBox.Text;
             }
         }
 
@@ -558,7 +609,7 @@ namespace MakeImageFromYoutube
                     videoDuration = Math.Floor(videoInfo.Duration.TotalSeconds); // 소수점이 나오는 경우가 있다해서 버림 사용
 
                     // 시작시간 초로 계산
-                    startTimeDuration = (Convert.ToDouble(hourTextBox.Text) * 60 * 60) + (Convert.ToDouble(hourTextBox.Text) * 60) + Convert.ToDouble(hourTextBox.Text);
+                    startTimeDuration = (Convert.ToDouble(hourTextBox.Text) * 60 * 60) + (Convert.ToDouble(minuteTextBox.Text) * 60) + Convert.ToDouble(secondTextBox.Text);
                 }
                 else
                 {
@@ -615,38 +666,54 @@ namespace MakeImageFromYoutube
                         saveImagePath = saveImagePath + @"\" + saveImageNameTextBox.Text;
 
                         string startTime = hourTextBox.Text + ":" + minuteTextBox.Text + ":" + secondTextBox.Text + ".00";
-                        string ffmpegPath = Application.StartupPath + @"\ffmpeg\bin\ffmpeg";
-                        string command = ffmpegPath + " -ss " + startTime + " -i " + videoPath + " -r " + frameRateUpDown.Text + " " + saveImagePath + "_%05d.jpg";
+                        string ffmpegPath = Application.StartupPath + @"\ffmpeg\bin\ffmpeg.exe";
+                        string command = " -ss " + startTime + " -i " + videoPath + " -r " + frameRateUpDown.Text + " " + saveImagePath + "_%05d.jpg"; 
 
-                        ProcessStartInfo pri = new ProcessStartInfo();
-                        Process pro = new Process();
+                        ProcessStartInfo startInfo = new ProcessStartInfo();
+                        startInfo.CreateNoWindow = false;
+                        startInfo.UseShellExecute = false;
+                        startInfo.FileName = ffmpegPath;
+                        startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                        startInfo.Arguments = command;
 
-                        // 실행할 파일명 입력
-                        pri.FileName = "cmd.exe";
+                        // 밑의 코드를 활성화시키면 버퍼에 무리가 가서 도중에 멈추게 됨
+                        //startInfo.RedirectStandardOutput = true;
+                        //startInfo.RedirectStandardError = true;
 
-                        // cmd 창 띄우기
-                        pri.CreateNoWindow = false; // false -> 띄우기, true -> 안 띄우기
-                        pri.UseShellExecute = false;
+                        using (Process process = Process.Start(startInfo))
+                        {
+                            process.WaitForExit();
+                        }
 
-                        pri.RedirectStandardInput = true;
-                        pri.RedirectStandardOutput = true;
-                        pri.RedirectStandardError = true;
+                        //ProcessStartInfo pri = new ProcessStartInfo();
+                        //Process pro = new Process();
 
-                        pro.StartInfo = pri;
-                        pro.Start();
+                        //// 실행할 파일명 입력
+                        //pri.FileName = "cmd.exe";
 
-                        // 명령어 실행
-                        pro.StandardInput.Write(command + Environment.NewLine);
-                        pro.StandardInput.Close();
+                        //// cmd 창 띄우기
+                        //pri.CreateNoWindow = false; // false -> 띄우기, true -> 안 띄우기
+                        //pri.UseShellExecute = false;
+
+                        //pri.RedirectStandardInput = true;
+                        //pri.RedirectStandardOutput = true;
+                        //pri.RedirectStandardError = true;
+
+                        //pro.StartInfo = pri;
+                        //pro.Start();
+
+                        //// 명령어 실행
+                        //pro.StandardInput.Write(command + Environment.NewLine);
+                        //pro.StandardInput.Close();
 
                         
-                        //string result = pro.StandardOutput.ReadToEnd();
+                        ////string result = pro.StandardOutput.ReadToEnd();
 
-                        pro.WaitForExit();
-                        pro.Close();
+                        //pro.WaitForExit();
+                        //pro.Close();
 
-                        // 다운로드 로그 저장
-                        //log.WriteLog(result);
+                        //// 다운로드 로그 저장
+                        ////log.WriteLog(result);
                     }
                     catch (Exception ex)
                     {
@@ -658,7 +725,45 @@ namespace MakeImageFromYoutube
             // 원래 있던 영상을 이미지 변환만
             else if (type == ONLY_CONTVERT_TO_IMAGES)
             {
+                try
+                {
+                    // 체크박스 체크 여부에 따라서 이미지 저장 경로 저장
+                    string saveImagePath = info.isCheckSaveImagePath == true ? saveImagePathTextBox.Text : Application.StartupPath + @"\" + savedVideoFileNameTextBox.Text;
+                    saveImagePath = saveImagePath + @"\" + savedVideoFileNameTextBox.Text;
+                    // 이미지 저장할 폴더 생성
+                    DirectoryInfo di = new DirectoryInfo(saveImagePath);
+                    if (!di.Exists)
+                    {
+                        di.Create();
+                    }
 
+                    saveImagePath = saveImagePath + @"\" + saveImageNameTextBox.Text;
+
+                    string startTime = hourTextBox.Text + ":" + minuteTextBox.Text + ":" + secondTextBox.Text + ".00";
+                    string ffmpegPath = Application.StartupPath + @"\ffmpeg\bin\ffmpeg.exe";
+                    string command = " -ss " + startTime + " -i " + videoPathTextBox.Text + " -r " + frameRateUpDown.Text + " " + saveImagePath + "_%05d.jpg";
+
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    startInfo.CreateNoWindow = false;
+                    startInfo.UseShellExecute = false;
+                    startInfo.FileName = ffmpegPath;
+                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    startInfo.Arguments = command;
+
+                    // 밑의 코드를 활성화시키면 버퍼에 무리가 가서 도중에 멈추게 됨
+                    //startInfo.RedirectStandardOutput = true;
+                    //startInfo.RedirectStandardError = true;
+
+                    using (Process process = Process.Start(startInfo))
+                    {
+                        process.WaitForExit();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("이미지 변환 중 에러가 발생했습니다.", "에러");
+                    log.WriteLog("[ERROR] : " + ex);
+                }
             }
         }
 
@@ -752,8 +857,22 @@ namespace MakeImageFromYoutube
             return directoryInfo.Exists ? true : false;
         }
 
+
         #endregion
 
-        
+        private void hourTextBox_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void minuteTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void secondTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
