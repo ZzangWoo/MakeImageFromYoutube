@@ -69,9 +69,26 @@
             this.label6 = new System.Windows.Forms.Label();
             this.yesRadioButton = new System.Windows.Forms.RadioButton();
             this.noRadioButton = new System.Windows.Forms.RadioButton();
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.advancedPannel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frameRateUpDown)).BeginInit();
+            this.tabControl.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -125,7 +142,7 @@
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label1);
             this.panel1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.panel1.Location = new System.Drawing.Point(2, 2);
+            this.panel1.Location = new System.Drawing.Point(6, 6);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(774, 221);
             this.panel1.TabIndex = 2;
@@ -222,7 +239,7 @@
             this.advancedPannel.Controls.Add(this.label8);
             this.advancedPannel.Controls.Add(this.label4);
             this.advancedPannel.Controls.Add(this.label3);
-            this.advancedPannel.Location = new System.Drawing.Point(2, 257);
+            this.advancedPannel.Location = new System.Drawing.Point(6, 255);
             this.advancedPannel.Name = "advancedPannel";
             this.advancedPannel.Size = new System.Drawing.Size(774, 257);
             this.advancedPannel.TabIndex = 3;
@@ -330,7 +347,6 @@
             this.secondTextBox.Name = "secondTextBox";
             this.secondTextBox.Size = new System.Drawing.Size(36, 21);
             this.secondTextBox.TabIndex = 4;
-            this.secondTextBox.TextChanged += new System.EventHandler(this.secondTextBox_TextChanged);
             this.secondTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.secondTextBox_KeyPress);
             this.secondTextBox.Leave += new System.EventHandler(this.secondTextBox_Leave);
             // 
@@ -342,7 +358,6 @@
             this.minuteTextBox.Name = "minuteTextBox";
             this.minuteTextBox.Size = new System.Drawing.Size(36, 21);
             this.minuteTextBox.TabIndex = 3;
-            this.minuteTextBox.TextChanged += new System.EventHandler(this.minuteTextBox_TextChanged);
             this.minuteTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.minutTextBox_KeyPress);
             this.minuteTextBox.Leave += new System.EventHandler(this.minuteTextBox_Leave);
             // 
@@ -354,7 +369,6 @@
             this.hourTextBox.Name = "hourTextBox";
             this.hourTextBox.Size = new System.Drawing.Size(35, 21);
             this.hourTextBox.TabIndex = 2;
-            this.hourTextBox.TextChanged += new System.EventHandler(this.hourTextBox_TextChanged);
             this.hourTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.hourTextBox_KeyPress);
             this.hourTextBox.Leave += new System.EventHandler(this.hourTextBox_Leave);
             // 
@@ -473,7 +487,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(0, 237);
+            this.label6.Location = new System.Drawing.Point(6, 235);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(109, 12);
             this.label6.TabIndex = 4;
@@ -482,7 +496,7 @@
             // yesRadioButton
             // 
             this.yesRadioButton.AutoSize = true;
-            this.yesRadioButton.Location = new System.Drawing.Point(140, 235);
+            this.yesRadioButton.Location = new System.Drawing.Point(146, 233);
             this.yesRadioButton.Name = "yesRadioButton";
             this.yesRadioButton.Size = new System.Drawing.Size(31, 16);
             this.yesRadioButton.TabIndex = 6;
@@ -494,7 +508,7 @@
             // noRadioButton
             // 
             this.noRadioButton.AutoSize = true;
-            this.noRadioButton.Location = new System.Drawing.Point(177, 235);
+            this.noRadioButton.Location = new System.Drawing.Point(183, 233);
             this.noRadioButton.Name = "noRadioButton";
             this.noRadioButton.Size = new System.Drawing.Size(32, 16);
             this.noRadioButton.TabIndex = 7;
@@ -503,18 +517,147 @@
             this.noRadioButton.UseVisualStyleBackColor = true;
             this.noRadioButton.CheckedChanged += new System.EventHandler(this.noRadioButton_CheckedChanged);
             // 
+            // tabControl
+            // 
+            this.tabControl.Controls.Add(this.tabPage1);
+            this.tabControl.Controls.Add(this.tabPage2);
+            this.tabControl.Location = new System.Drawing.Point(1, 2);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(796, 543);
+            this.tabControl.TabIndex = 8;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.panel1);
+            this.tabPage1.Controls.Add(this.advancedPannel);
+            this.tabPage1.Controls.Add(this.noRadioButton);
+            this.tabPage1.Controls.Add(this.label6);
+            this.tabPage1.Controls.Add(this.yesRadioButton);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(788, 517);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Video";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.panel2);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(788, 517);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Audio";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.textBox1);
+            this.panel2.Controls.Add(this.label21);
+            this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.button2);
+            this.panel2.Controls.Add(this.textBox2);
+            this.panel2.Controls.Add(this.textBox3);
+            this.panel2.Controls.Add(this.label22);
+            this.panel2.Controls.Add(this.label23);
+            this.panel2.Controls.Add(this.label24);
+            this.panel2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.panel2.Location = new System.Drawing.Point(6, 6);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(774, 221);
+            this.panel2.TabIndex = 3;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(16, 126);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(570, 21);
+            this.textBox1.TabIndex = 3;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(15, 110);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(97, 12);
+            this.label21.TabIndex = 5;
+            this.label21.Text = "저장할 음악 이름";
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.button1.Location = new System.Drawing.Point(628, 70);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(119, 125);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "다운로드";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(524, 70);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(62, 23);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "찾기";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(15, 174);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(571, 21);
+            this.textBox2.TabIndex = 4;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(15, 70);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(503, 21);
+            this.textBox3.TabIndex = 1;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(13, 159);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(79, 12);
+            this.label22.TabIndex = 1;
+            this.label22.Text = "Youtube 주소";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("굴림", 12F);
+            this.label23.Location = new System.Drawing.Point(13, 12);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(72, 16);
+            this.label23.TabIndex = 1;
+            this.label23.Text = "기본기능";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(13, 55);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(97, 12);
+            this.label24.TabIndex = 0;
+            this.label24.Text = "음악 저장할 경로";
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(780, 519);
-            this.Controls.Add(this.noRadioButton);
-            this.Controls.Add(this.yesRadioButton);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.advancedPannel);
+            this.ClientSize = new System.Drawing.Size(797, 543);
+            this.Controls.Add(this.tabControl);
             this.MaximizeBox = false;
             this.Name = "mainForm";
             this.Text = "Youtube -> Image";
@@ -524,8 +667,13 @@
             this.advancedPannel.ResumeLayout(false);
             this.advancedPannel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frameRateUpDown)).EndInit();
+            this.tabControl.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -572,6 +720,19 @@
         private System.Windows.Forms.TextBox saveImagePathTextBox;
         private System.Windows.Forms.TextBox saveImageNameTextBox;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label24;
     }
 }
 

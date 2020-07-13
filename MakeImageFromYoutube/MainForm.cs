@@ -461,6 +461,9 @@ namespace MakeImageFromYoutube
 
             // 고급기능 패널 활성화
             advancedPannel.Visible = true;
+
+            // 탭 컨트롤 크기 조정
+            tabControl.Size = new System.Drawing.Size(796, 543);
         }
 
         /// <summary>
@@ -474,6 +477,9 @@ namespace MakeImageFromYoutube
 
             // 고급기능 패널 비활성화
             advancedPannel.Visible = false;
+
+            // 탭 컨트롤 크기 조정
+            tabControl.Size = new System.Drawing.Size(788, 280);
         }
 
 
@@ -889,19 +895,23 @@ namespace MakeImageFromYoutube
 
         #endregion
 
-        private void hourTextBox_TextChanged(object sender, EventArgs e)
+        private void TabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-        }
-
-        private void minuteTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void secondTextBox_TextChanged(object sender, EventArgs e)
-        {
-
+            if (tabControl.SelectedTab == tabPage1)
+            {
+                if (yesRadioButton.Checked)
+                {
+                    tabControl.Size = new System.Drawing.Size(796, 543);
+                }
+                else if (noRadioButton.Checked)
+                {
+                    tabControl.Size = new System.Drawing.Size(796, 280);
+                }
+            } 
+            else if (tabControl.SelectedTab == tabPage2)
+            {
+                tabControl.Size = new System.Drawing.Size(796, 255);
+            }
         }
     }
 }
