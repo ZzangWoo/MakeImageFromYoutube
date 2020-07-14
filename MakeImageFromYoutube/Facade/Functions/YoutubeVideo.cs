@@ -9,7 +9,7 @@ namespace MakeImageFromYoutube.Facade.Functions
 {
     class YoutubeVideo
     {
-        public int Download(string exePath, string saveVideoName, string youtubeURL)
+        public string Download(string youtubedlPath, string saveVideoName, string youtubeURL)
         {
             try
             {
@@ -17,7 +17,7 @@ namespace MakeImageFromYoutube.Facade.Functions
                 //string exePath = Application.StartupPath + @"\ffmpeg\bin\youtube-dl";
                 //string savedVideoName = storageLocationTextBox.Text + @"\" + savedVideoFileNameTextBox.Text;
                 //string command = exePath + " -o " + savedVideoName + " " + youtubeURLTextBox.Text;
-                string command = exePath + " -o " + saveVideoName + " -f bestvideo+bestaudio --merge-output-format mkv " + youtubeURL;
+                string command = youtubedlPath + " -o " + saveVideoName + " -f bestvideo+bestaudio --merge-output-format mkv " + youtubeURL;
 
                 ProcessStartInfo pri = new ProcessStartInfo();
                 Process pro = new Process();
@@ -43,18 +43,14 @@ namespace MakeImageFromYoutube.Facade.Functions
                 // 이 코드가 있어야 제대로 유튜브 영상을 다운받을 수 있다.
                 string result = pro.StandardOutput.ReadToEnd();
 
-                // 다운로드 로그 저장
-                //log.WriteLog(result);
-
                 pro.WaitForExit();
                 pro.Close();
 
-                return 1;
+                return result;
             }
             catch (Exception ex)
             {
-                //log.WriteLog("[ERROR] : " + ex);
-                return 0;
+                return "[Error] : " + ex;
             }
         }
     }

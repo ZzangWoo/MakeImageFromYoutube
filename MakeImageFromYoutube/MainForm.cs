@@ -528,6 +528,29 @@ namespace MakeImageFromYoutube
 
         #endregion
 
+        #region ## TabControl
+
+        private void TabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl.SelectedTab == tabPage1)
+            {
+                if (yesRadioButton.Checked)
+                {
+                    tabControl.Size = new System.Drawing.Size(796, 543);
+                }
+                else if (noRadioButton.Checked)
+                {
+                    tabControl.Size = new System.Drawing.Size(796, 280);
+                }
+            }
+            else if (tabControl.SelectedTab == tabPage2)
+            {
+                tabControl.Size = new System.Drawing.Size(796, 255);
+            }
+        }
+
+        #endregion
+
         #region ## Form
 
         /// <summary>
@@ -895,23 +918,5 @@ namespace MakeImageFromYoutube
 
         #endregion
 
-        private void TabControl_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tabControl.SelectedTab == tabPage1)
-            {
-                if (yesRadioButton.Checked)
-                {
-                    tabControl.Size = new System.Drawing.Size(796, 543);
-                }
-                else if (noRadioButton.Checked)
-                {
-                    tabControl.Size = new System.Drawing.Size(796, 280);
-                }
-            } 
-            else if (tabControl.SelectedTab == tabPage2)
-            {
-                tabControl.Size = new System.Drawing.Size(796, 255);
-            }
-        }
     }
 }
