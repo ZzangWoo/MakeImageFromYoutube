@@ -9,7 +9,24 @@ namespace MakeImageFromYoutube.Facade.Functions
 {
     class YoutubeVideo
     {
-        public string Download(string youtubedlPath, string saveVideoName, string youtubeURL)
+        #region # Property
+
+        private Log log;
+
+        #endregion
+
+        #region # Constructor
+
+        public YoutubeVideo()
+        {
+            log = new Log();
+        }
+
+        #endregion
+
+        #region # Method
+
+        public bool Download(Info info)
         {
             try
             {
@@ -17,7 +34,7 @@ namespace MakeImageFromYoutube.Facade.Functions
                 //string exePath = Application.StartupPath + @"\ffmpeg\bin\youtube-dl";
                 //string savedVideoName = storageLocationTextBox.Text + @"\" + savedVideoFileNameTextBox.Text;
                 //string command = exePath + " -o " + savedVideoName + " " + youtubeURLTextBox.Text;
-                string command = youtubedlPath + " -o " + saveVideoName + " -f bestvideo+bestaudio --merge-output-format mkv " + youtubeURL;
+                string command = info.youtubedlPath + " -o " + info.saveVideoPath + " -f bestvideo+bestaudio --merge-output-format mkv " + info.youtubeURL;
 
                 ProcessStartInfo pri = new ProcessStartInfo();
                 Process pro = new Process();
@@ -46,12 +63,17 @@ namespace MakeImageFromYoutube.Facade.Functions
                 pro.WaitForExit();
                 pro.Close();
 
-                return result;
+                log.WriteLog(result);
+
+                return true;
             }
             catch (Exception ex)
             {
-                return "[Error] : " + ex;
+                log.WriteLog("[ERROR] : " + ex);
+                return false;
             }
         }
+
+        #endregion
     }
 }

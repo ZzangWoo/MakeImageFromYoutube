@@ -63,6 +63,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Facade\Functions\CutVideo.cs" />
     <Compile Include="Facade\Functions\ToImages.cs" />
     <Compile Include="Facade\Functions\YoutubeAudio.cs" />
     <Compile Include="Facade\Functions\YoutubeVideo.cs" />

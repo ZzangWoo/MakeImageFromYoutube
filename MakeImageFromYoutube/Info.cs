@@ -16,11 +16,6 @@ namespace MakeImageFromYoutube
         public bool checkedAdvanced { get; set; } = false;
 
         /// <summary>
-        /// Youtube 영상 저장경로
-        /// </summary>
-        public string savedVideoPath { get; set; }
-
-        /// <summary>
         /// 고급기능 -> 시
         /// </summary>
         public string hour { get; set; } = "00";
@@ -36,11 +31,6 @@ namespace MakeImageFromYoutube
         public string second { get; set; } = "00";
 
         /// <summary>
-        /// 프레임 레이트 값
-        /// </summary>
-        public decimal frameRate { get; set; } = 1;
-
-        /// <summary>
         /// 변환할 동영상 경로 체크박스 체크 여부
         /// </summary>
         public bool isCheckVideoPath { get; set; } = false;
@@ -49,5 +39,75 @@ namespace MakeImageFromYoutube
         /// 저장할 이미지 경로 체크박스 체크 여부
         /// </summary>
         public bool isCheckSaveImagePath { get; set; } = false;
+
+        #region # Facade Property
+
+        #region ## For Download
+
+        /// <summary>
+        /// Youtube-dl.exe 경로
+        /// </summary>
+        public string youtubedlPath { get; set; }
+
+        /// <summary>
+        /// Youtube 영상 저장경로
+        /// </summary>
+        public string saveVideoPath { get; set; }
+
+        /// <summary>
+        /// Youtube 영상 URL
+        /// </summary>
+        public string youtubeURL { get; set; }
+
+        #endregion
+
+        #region ## For Convert
+
+        /// <summary>
+        /// 이미지 폴더 이름
+        /// </summary>
+        public string imageFolderName { get; set; }
+
+        /// <summary>
+        /// 저장될 이미지 경로
+        /// </summary>
+        public string saveImagePath { get; set; }
+
+        /// <summary>
+        /// 저장될 이미지 이름
+        /// </summary>
+        public string saveImageName { get; set; }
+
+        /// <summary>
+        /// 이미지로 변환할 영상 경로
+        /// </summary>
+        public string videoPath { get; set; }
+
+        /// <summary>
+        /// FFMPEG 경로
+        /// </summary>
+        public string ffmpegPath { get; set; }
+
+        /// <summary>
+        /// 이미지 변환할 영상 시작시간
+        /// </summary>
+        public string startTime { get; set; }
+
+        /// <summary>
+        /// 프레임 레이트 값
+        /// </summary>
+        public decimal frameRate { get; set; } = 1;
+
+        #endregion
+
+        #region ## For Audio
+
+        #endregion
+
+        #region ## For Cut Video
+
+        #endregion
+
+        #endregion
     }
 }

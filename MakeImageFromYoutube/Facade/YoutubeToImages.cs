@@ -29,7 +29,7 @@ namespace MakeImageFromYoutube.Facade
 
         #endregion
 
-        #region Method
+        #region # Method
 
         /// <summary>
         /// 유튜브 영상만 다운로드
@@ -38,19 +38,29 @@ namespace MakeImageFromYoutube.Facade
         /// <param name="saveVideoName"></param>
         /// <param name="youtubeURL"></param>
         /// <returns></returns>
-        public string DownloadYoutubeVideo(string yotubedlPath, string saveVideoName, string youtubeURL)
+        public bool DownloadYoutubeVideo(Info info)
         {
-            return youtubeVideo.Download(yotubedlPath, saveVideoName, youtubeURL);
+            return youtubeVideo.Download(info);
         }
 
-        public string ConvertYoutubeToImages(string youtubedlPath, string saveVideoName, string youtubeURL, string imageFolderName, 
-            string saveImagePath, string saveImageName, string videoPath, string ffmpegPath, string startTime, string frameRate)
+        /// <summary>
+        /// 유튜브 영상 다운 후 이미지 변환
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        public bool ConvertYoutubeToImages(Info info)
         {
-            string result = youtubeVideo.Download(youtubedlPath, saveVideoName, youtubeURL);
-            if (result.Substring(1, 5) == "Error")
-            {
+            return toImages.Convert(info);
+        }
 
-            }
+        /// <summary>
+        /// 기존에 있는 영상을 이미지로 변환
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        public bool ConvertVideoToImages(Info info)
+        {
+            return toImages.OnlyConvert(info);
         }
 
         #endregion
