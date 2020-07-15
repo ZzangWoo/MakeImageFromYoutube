@@ -48,8 +48,8 @@ namespace MakeImageFromYoutube
         /// </summary>
         private YoutubeToImages youtubeToImages;
 
-        private const int VIDEO_CONVERT_TO_IMAGES = 0;
-        private const int ONLY_CONTVERT_TO_IMAGES = 1;
+        //private const int VIDEO_CONVERT_TO_IMAGES = 0;
+        //private const int ONLY_CONTVERT_TO_IMAGES = 1;
 
         #endregion
 
@@ -76,6 +76,8 @@ namespace MakeImageFromYoutube
         #region # Event
 
         #region ## Button
+
+        #region ### Youtube Video + Convert Images
 
         /// <summary>
         /// 영상 저장할 경로 선택 이벤트
@@ -398,7 +400,80 @@ namespace MakeImageFromYoutube
 
         #endregion
 
+        #region ### YoutubeAudio
+
+        /// <summary>
+        /// 찾기 버튼 클릭 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void findSaveAudioPathButton_Click(object sender, EventArgs e)
+        {
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.IsFolderPicker = true;
+
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                saveAudioPathTextBox.Text = dialog.FileName;
+            }
+        }
+
+        /// <summary>
+        /// 다운로드 버튼 클릭 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void audioDownloadButton_Click(object sender, EventArgs e)
+        {
+            // 폴더 경로 텍스트 및 Youtube 주소 유무 확인
+            if (string.IsNullOrEmpty(saveAudioPathTextBox.Text) || string.IsNullOrEmpty(saveAudioNameTextBox.Text) || string.IsNullOrEmpty(audioYoutubeURLTextBox.Text))
+            {
+                MessageBox.Show("기본 기능의 입력란에 작성하지 않은 곳이 있는지 확인해주세요.", "경고");
+            }
+            // 음악 저장할 경로에 띄어쓰기 유무 판별
+            else if (CheckWhiteSpaceInPath(saveAudioPathTextBox.Text).Count > 0)
+            {
+                MessageBox.Show("음악 저장할 경로에 띄어쓰기가 포함되어있습니다. 경로를 다시 한 번 확인해주세요.", "경고");
+                saveAudioPathTextBox.Focus();
+            }
+            // 저장할 음악 이름에 띄어쓰기 유무 판별
+            else if (CheckWhiteSpaceInPath(saveAudioNameTextBox.Text).Count > 0)
+            {
+                MessageBox.Show("저장할 음악 이름에 띄어쓰기가 포함되어있습니다. 띄어쓰기가 포함되지 않게 입력해주세요.", "경고");
+                saveAudioNameTextBox.Focus();
+            }
+            // 음악 저장할 경로 존재 여부 판별
+            else if (!IsExistDirectory(saveAudioPathTextBox.Text))
+            {
+                MessageBox.Show("음악 저장할 경로는 없는 경로입니다. 경로를 다시 한 번 확인해주세요.", "경고");
+                saveAudioPathTextBox.Focus();
+            }
+            else
+            {
+                info.youtubedlPath = Application.StartupPath + @"\ffmpeg\bin\youtube-dl";
+                info.saveAudioPath = saveAudioPathTextBox.Text + @"\" + saveAudioNameTextBox.Text + ".mp3";
+                info.youtubeURL = audioYoutubeURLTextBox.Text;
+
+                bool result = youtubeToImages.DownloadYoutubeAudio(info);
+
+                if (result)
+                {
+                    MessageBox.Show("유튜브 영상에서 음원 추출 성공", "알림");
+                }
+                else
+                {
+                    MessageBox.Show("유튜브 영상에서 음원 추출 실패", "알림");
+                }
+            }
+        }
+
+        #endregion
+
+        #endregion
+
         #region ## TextBox
+
+        #region ### Youtube Video + Convert Images
 
         /// <summary>
         /// 고급기능 -> 시 변경 이벤트
@@ -569,7 +644,17 @@ namespace MakeImageFromYoutube
 
         #endregion
 
+        #region ### YoutubeAudio
+
+
+
+        #endregion
+
+        #endregion
+
         #region ## CheckBox & RadioButton
+
+        #region ### Youtube Video + Convert Images
 
         /// <summary>
         /// Y 라디오버튼 클릭
@@ -646,6 +731,12 @@ namespace MakeImageFromYoutube
                 saveImagePathButton.Enabled = false;
             }
         }
+
+        #endregion
+
+        #region ### YoutubeAudio
+
+        #endregion
 
         #endregion
 
@@ -1042,5 +1133,6 @@ namespace MakeImageFromYoutube
         //}
 
         #endregion
+
     }
 }

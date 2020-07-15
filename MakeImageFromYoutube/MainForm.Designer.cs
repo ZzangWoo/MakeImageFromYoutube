@@ -73,15 +73,16 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.saveAudioNameTextBox = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.audioDownloadButton = new System.Windows.Forms.Button();
+            this.findSaveAudioPathButton = new System.Windows.Forms.Button();
+            this.audioYoutubeURLTextBox = new System.Windows.Forms.TextBox();
+            this.saveAudioPathTextBox = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel1.SuspendLayout();
             this.advancedPannel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frameRateUpDown)).BeginInit();
@@ -521,6 +522,7 @@
             // 
             this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Controls.Add(this.tabPage2);
+            this.tabControl.Controls.Add(this.tabPage3);
             this.tabControl.Location = new System.Drawing.Point(1, 2);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -558,12 +560,12 @@
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.textBox1);
+            this.panel2.Controls.Add(this.saveAudioNameTextBox);
             this.panel2.Controls.Add(this.label21);
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.textBox2);
-            this.panel2.Controls.Add(this.textBox3);
+            this.panel2.Controls.Add(this.audioDownloadButton);
+            this.panel2.Controls.Add(this.findSaveAudioPathButton);
+            this.panel2.Controls.Add(this.audioYoutubeURLTextBox);
+            this.panel2.Controls.Add(this.saveAudioPathTextBox);
             this.panel2.Controls.Add(this.label22);
             this.panel2.Controls.Add(this.label23);
             this.panel2.Controls.Add(this.label24);
@@ -573,12 +575,12 @@
             this.panel2.Size = new System.Drawing.Size(774, 221);
             this.panel2.TabIndex = 3;
             // 
-            // textBox1
+            // saveAudioNameTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(16, 126);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(570, 21);
-            this.textBox1.TabIndex = 3;
+            this.saveAudioNameTextBox.Location = new System.Drawing.Point(16, 126);
+            this.saveAudioNameTextBox.Name = "saveAudioNameTextBox";
+            this.saveAudioNameTextBox.Size = new System.Drawing.Size(570, 21);
+            this.saveAudioNameTextBox.TabIndex = 3;
             // 
             // label21
             // 
@@ -589,38 +591,40 @@
             this.label21.TabIndex = 5;
             this.label21.Text = "저장할 음악 이름";
             // 
-            // button1
+            // audioDownloadButton
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.button1.Location = new System.Drawing.Point(628, 70);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(119, 125);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "다운로드";
-            this.button1.UseVisualStyleBackColor = false;
+            this.audioDownloadButton.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.audioDownloadButton.Location = new System.Drawing.Point(628, 70);
+            this.audioDownloadButton.Name = "audioDownloadButton";
+            this.audioDownloadButton.Size = new System.Drawing.Size(119, 125);
+            this.audioDownloadButton.TabIndex = 5;
+            this.audioDownloadButton.Text = "다운로드";
+            this.audioDownloadButton.UseVisualStyleBackColor = false;
+            this.audioDownloadButton.Click += new System.EventHandler(this.audioDownloadButton_Click);
             // 
-            // button2
+            // findSaveAudioPathButton
             // 
-            this.button2.Location = new System.Drawing.Point(524, 70);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(62, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "찾기";
-            this.button2.UseVisualStyleBackColor = true;
+            this.findSaveAudioPathButton.Location = new System.Drawing.Point(524, 70);
+            this.findSaveAudioPathButton.Name = "findSaveAudioPathButton";
+            this.findSaveAudioPathButton.Size = new System.Drawing.Size(62, 23);
+            this.findSaveAudioPathButton.TabIndex = 2;
+            this.findSaveAudioPathButton.Text = "찾기";
+            this.findSaveAudioPathButton.UseVisualStyleBackColor = true;
+            this.findSaveAudioPathButton.Click += new System.EventHandler(this.findSaveAudioPathButton_Click);
             // 
-            // textBox2
+            // audioYoutubeURLTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(15, 174);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(571, 21);
-            this.textBox2.TabIndex = 4;
+            this.audioYoutubeURLTextBox.Location = new System.Drawing.Point(15, 174);
+            this.audioYoutubeURLTextBox.Name = "audioYoutubeURLTextBox";
+            this.audioYoutubeURLTextBox.Size = new System.Drawing.Size(571, 21);
+            this.audioYoutubeURLTextBox.TabIndex = 4;
             // 
-            // textBox3
+            // saveAudioPathTextBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(15, 70);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(503, 21);
-            this.textBox3.TabIndex = 1;
+            this.saveAudioPathTextBox.Location = new System.Drawing.Point(15, 70);
+            this.saveAudioPathTextBox.Name = "saveAudioPathTextBox";
+            this.saveAudioPathTextBox.Size = new System.Drawing.Size(503, 21);
+            this.saveAudioPathTextBox.TabIndex = 1;
             // 
             // label22
             // 
@@ -649,6 +653,16 @@
             this.label24.Size = new System.Drawing.Size(97, 12);
             this.label24.TabIndex = 0;
             this.label24.Text = "음악 저장할 경로";
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(788, 517);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Cut Video";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // mainForm
             // 
@@ -724,15 +738,16 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox saveAudioNameTextBox;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button audioDownloadButton;
+        private System.Windows.Forms.Button findSaveAudioPathButton;
+        private System.Windows.Forms.TextBox audioYoutubeURLTextBox;
+        private System.Windows.Forms.TextBox saveAudioPathTextBox;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TabPage tabPage3;
     }
 }
 

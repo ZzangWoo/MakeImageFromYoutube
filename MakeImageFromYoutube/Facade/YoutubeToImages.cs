@@ -34,9 +34,7 @@ namespace MakeImageFromYoutube.Facade
         /// <summary>
         /// 유튜브 영상만 다운로드
         /// </summary>
-        /// <param name="exePath"></param>
-        /// <param name="saveVideoName"></param>
-        /// <param name="youtubeURL"></param>
+        /// <param name="info"></param>
         /// <returns></returns>
         public bool DownloadYoutubeVideo(Info info)
         {
@@ -61,6 +59,16 @@ namespace MakeImageFromYoutube.Facade
         public bool ConvertVideoToImages(Info info)
         {
             return toImages.OnlyConvert(info);
+        }
+
+        /// <summary>
+        /// 유튜브 음원만 다운로드
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        public bool DownloadYoutubeAudio(Info info)
+        {
+            return youtubeAudio.Download(info);
         }
 
         #endregion

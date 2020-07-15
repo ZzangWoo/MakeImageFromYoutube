@@ -102,6 +102,16 @@ namespace MakeImageFromYoutube
 
         #region ## For Audio
 
+        /// <summary>
+        /// 음악 저장할 경로
+        /// </summary>
+        public string saveAudioPath { get; set; }
+
+        /// <summary>
+        /// 저장할 음악 이름
+        /// </summary>
+        public string saveAudioName { get; set; }
+
         #endregion
 
         #region ## For Cut Video
