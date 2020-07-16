@@ -15,6 +15,7 @@ namespace MakeImageFromYoutube.Facade
         private YoutubeVideo youtubeVideo;
         private YoutubeAudio youtubeAudio;
         private ToImages toImages;
+        private CutVideo cutVideo;
 
         #endregion
 
@@ -25,6 +26,7 @@ namespace MakeImageFromYoutube.Facade
             youtubeVideo = new YoutubeVideo();
             youtubeAudio = new YoutubeAudio();
             toImages = new ToImages();
+            cutVideo = new CutVideo();
         }
 
         #endregion
@@ -69,6 +71,11 @@ namespace MakeImageFromYoutube.Facade
         public bool DownloadYoutubeAudio(Info info)
         {
             return youtubeAudio.Download(info);
+        }
+
+        public bool CutVideo(Info info)
+        {
+            return cutVideo.Cut(info);
         }
 
         #endregion

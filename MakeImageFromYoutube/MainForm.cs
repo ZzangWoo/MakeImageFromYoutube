@@ -469,6 +469,189 @@ namespace MakeImageFromYoutube
 
         #endregion
 
+        #region ### Cut Video
+
+        /// <summary>
+        /// 자르기 할 영상 찾기 버튼 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void findCutVideoPathButton_Click(object sender, EventArgs e)
+        {
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                cutVideoPathTextBox.Text = dialog.FileName;
+            }
+        }
+
+        /// <summary>
+        /// 잘라낸 영상 경로 찾기 버튼 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void findCutTargetVideoPathButton_Click(object sender, EventArgs e)
+        {
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.IsFolderPicker = true;
+
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                cutTargetVideoPathTextBox.Text = dialog.FileName;
+            }
+        }
+
+        /// <summary>
+        /// 자르기 버튼 클릭 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cutVideoButton_Click(object sender, EventArgs e)
+        {
+            // 자르기 할 영상 빈 칸인지 판별
+            if (string.IsNullOrEmpty(cutVideoPathTextBox.Text))
+            {
+                MessageBox.Show("자르기 할 영상을 선택해주세요.", "경고");
+                cutVideoPathTextBox.Focus();
+            }
+            // 잘라낸 영상 경로 빈 칸인지 판별
+            else if (string.IsNullOrEmpty(cutTargetVideoPathTextBox.Text))
+            {
+                MessageBox.Show("잘라낸 영상 경로를 선택해주세요.", "경고");
+                cutTargetVideoPathTextBox.Focus();
+            }
+            // 잘라낸 영상 이름 빈 칸인지 판별
+            else if (string.IsNullOrEmpty(cutVideoNameTextBox.Text))
+            {
+                MessageBox.Show("잘라낸 영상 이름을 입력해주세요.", "경고");
+                cutVideoNameTextBox.Focus();
+            }
+            // 시작시간 '시' 빈 칸인지 판별
+            else if (string.IsNullOrEmpty(startHourTextBox.Text))
+            {
+                MessageBox.Show("시작시간의 '시'를 입력해주세요.", "경고");
+                startHourTextBox.Focus();
+            }
+            // 시작시간 '분' 빈 칸인지 판별
+            else if (string.IsNullOrEmpty(startMinuteTextBox.Text))
+            {
+                MessageBox.Show("시작시간의 '분'을 입력해주세요.", "경고");
+                startMinuteTextBox.Focus();
+            }
+            // 시작시간 '초' 빈 칸인지 판별
+            else if (string.IsNullOrEmpty(startSecondTextBox.Text))
+            {
+                MessageBox.Show("시작시간의 '초'를 입력해주세요.", "경고");
+                startSecondTextBox.Focus();
+            }
+            // 종료시간 '시' 빈 칸인지 판별
+            else if (string.IsNullOrEmpty(finalHourTextBox.Text))
+            {
+                MessageBox.Show("종료시간의 '시'를 입력해주세요.", "경고");
+                finalHourTextBox.Focus();
+            }
+            // 종료시간 '분' 빈 칸인지 판별
+            else if (string.IsNullOrEmpty(finalMinuteTextBox.Text))
+            {
+                MessageBox.Show("종료시간의 '분'을 입력해주세요.", "경고");
+                finalMinuteTextBox.Focus();
+            }
+            // 종료시간 '초' 빈 칸인지 판별
+            else if (string.IsNullOrEmpty(finalSecondTextBox.Text))
+            {
+                MessageBox.Show("종료시간의 '초'를 입력해주세요.", "경고");
+                finalSecondTextBox.Focus();
+            }
+            // 자르기 할 영상에 빈 칸이 들어있는지 판별
+            else if (CheckWhiteSpaceInPath(cutVideoPathTextBox.Text).Count > 0)
+            {
+                MessageBox.Show("자르기 할 영상 경로에 빈 칸이 포함되어있습니다.", "경고");
+                cutVideoPathTextBox.Focus();
+            }
+            // 잘라낸 영상 경로에 빈 칸이 들어있는지 판별
+            else if (CheckWhiteSpaceInPath(cutTargetVideoPathTextBox.Text).Count > 0)
+            {
+                MessageBox.Show("잘라낸 영상 경로에 빈 칸이 포함되어 있습니다.", "경고");
+                cutTargetVideoPathTextBox.Focus();
+            }
+            // 잘라낸 영상 이름에 빈 칸이 들어있는지 판별
+            else if (CheckWhiteSpaceInPath(cutVideoNameTextBox.Text).Count > 0)
+            {
+                MessageBox.Show("잘라낸 영상 이름에 빈 칸이 포함되어 있습니다.", "경고");
+                cutVideoNameTextBox.Focus();
+            }
+            // 자르기 할 영상 존재 유무 판별
+            else if (!IsExistFile(cutVideoPathTextBox.Text))
+            {
+                MessageBox.Show("자르기 할 영상이 존재하지 않습니다.", "경고");
+                cutVideoPathTextBox.Focus();
+            }
+            // 잘라낸 영상 경로 존재 유무 판별
+            else if (!IsExistDirectory(cutTargetVideoPathTextBox.Text))
+            {
+                MessageBox.Show("잘라낸 영상 경로가 존재하지 않습니다.", "경고");
+                cutTargetVideoPathTextBox.Focus();
+            }
+            else
+            {
+                FFProbe ffProbe = new FFProbe();
+                var videoInfo = ffProbe.GetMediaInfo(cutVideoPathTextBox.Text);
+                Double videoDuration = Math.Floor(videoInfo.Duration.TotalSeconds); // 소수점이 나오는 경우가 있다해서 버림 사용
+
+                // 시작시간 초로 계산
+                Double startTimeDuration = (Convert.ToDouble(startHourTextBox.Text) * 60 * 60) + (Convert.ToDouble(startMinuteTextBox.Text) * 60) + Convert.ToDouble(startSecondTextBox.Text);
+                Double finalTimeDuration = (Convert.ToDouble(finalHourTextBox.Text) * 60 * 60) + (Convert.ToDouble(finalMinuteTextBox.Text) * 60) + Convert.ToDouble(finalSecondTextBox.Text);
+
+                // 시작시간이 영상 길이보다 길 때
+                if (startTimeDuration >= videoDuration)
+                {
+                    MessageBox.Show("영상 종료시간보다 시작시간이 더 큽니다.", "경고");
+                    startHourTextBox.Focus();
+                }
+                // 종료시간이 영상 길이보다 길 때
+                else if (finalTimeDuration >= videoDuration)
+                {
+                    MessageBox.Show("영상 종료시간보다 종료시간이 더 큽니다.", "경고");
+                    finalHourTextBox.Focus();
+                }
+                // 시작시간과 종료시간이 같을 때
+                else if (startTimeDuration == finalTimeDuration)
+                {
+                    MessageBox.Show("시작시간과 종료시간이 같습니다.", "경고");
+                    startHourTextBox.Focus();
+                }
+                // 시작시간이 종료시간보다 클 때
+                else if (startTimeDuration > finalTimeDuration)
+                {
+                    MessageBox.Show("시작시간이 종료시간보다 큽니다.", "경고");
+                    startHourTextBox.Focus();
+                }
+                else
+                {
+                    info.ffmpegPath = Application.StartupPath + @"\ffmpeg\bin\ffmpeg.exe";
+                    info.cutVideoPath = cutVideoPathTextBox.Text;
+                    info.startTime = startHourTextBox.Text + ":" + startMinuteTextBox.Text + ":" + startSecondTextBox.Text;
+                    info.finalTime = finalHourTextBox.Text + ":" + finalMinuteTextBox.Text + ":" + finalSecondTextBox.Text;
+                    info.cutTargetVideoPath = cutTargetVideoPathTextBox.Text;
+                    info.cutVideoName = cutVideoNameTextBox.Text;
+
+                    bool result = youtubeToImages.CutVideo(info);
+
+                    if (result)
+                    {
+                        MessageBox.Show("영상 자르기 성공", "알림");
+                    }
+                    else
+                    {
+                        MessageBox.Show("영상 자르기 실패", "알림");
+                    }
+                }
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #region ## TextBox
@@ -650,6 +833,236 @@ namespace MakeImageFromYoutube
 
         #endregion
 
+        #region ### Cut Video
+
+        /// <summary>
+        /// 시 텍스트 박스에서 키보드 눌렀을 때 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StartHour_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //숫자만 입력되도록 필터링
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back)))    //숫자와 백스페이스를 제외한 나머지를 바로 처리
+            {
+                e.Handled = true;
+                MessageBox.Show("숫자만 입력할 수 있습니다.", "경고");
+            }
+        }
+
+        /// <summary>
+        /// 분 텍스트 박스에서 키보드 눌렀을 때 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StartMinute_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string minute = string.Empty;
+
+            //숫자만 입력되도록 필터링
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back)))    //숫자와 백스페이스를 제외한 나머지를 바로 처리
+            {
+                e.Handled = true;
+                MessageBox.Show("숫자만 입력할 수 있습니다.", "경고");
+            }
+            else if (char.IsDigit(e.KeyChar))
+            {
+                minute = startMinuteTextBox.Text + e.KeyChar;
+
+                // 60분 이상 입력 제한
+                if (Convert.ToInt32(minute) >= 60)
+                {
+                    e.Handled = true;
+                    MessageBox.Show("60분 이상 입력 불가합니다.", "경고");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 초 텍스트 박스에서 키보드 눌렀을 때 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StartSecond_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string second = string.Empty;
+
+            //숫자만 입력되도록 필터링
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back)))    //숫자와 백스페이스를 제외한 나머지를 바로 처리
+            {
+                e.Handled = true;
+                MessageBox.Show("숫자만 입력할 수 있습니다.", "경고");
+            }
+            else if (char.IsDigit(e.KeyChar))
+            {
+                second = startSecondTextBox.Text + e.KeyChar;
+
+                // 60분 이상 입력 제한
+                if (Convert.ToInt32(second) >= 60)
+                {
+                    e.Handled = true;
+                    MessageBox.Show("60초 이상 입력 불가합니다.", "경고");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 시 변경 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StartHour_Leave(object sender, EventArgs e)
+        {
+            if (startHourTextBox.Text.Length < 2)
+            {
+                MessageBox.Show("00h 형태로 입력해주세요.", "경고");
+                startHourTextBox.Focus();
+            }
+        }
+        
+        /// <summary>
+        /// 분 변경 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StartMinute_Leave(object sender, EventArgs e)
+        {
+            if (startMinuteTextBox.Text.Length < 2)
+            {
+                MessageBox.Show("00m 형태로 입력해주세요.", "경고");
+                startMinuteTextBox.Focus();
+            }
+        }
+
+        /// <summary>
+        /// 초 변경 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StartSecond_Leave(object sender, EventArgs e)
+        {
+            if (startSecondTextBox.Text.Length < 2)
+            {
+                MessageBox.Show("00s 형태로 입력해주세요.", "경고");
+                startSecondTextBox.Focus();
+            }
+        }
+
+        /// <summary>
+        /// 시 텍스트 박스에서 키보드 눌렀을 때 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FinalHour_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //숫자만 입력되도록 필터링
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back)))    //숫자와 백스페이스를 제외한 나머지를 바로 처리
+            {
+                e.Handled = true;
+                MessageBox.Show("숫자만 입력할 수 있습니다.", "경고");
+            }
+        }
+
+        /// <summary>
+        /// 분 텍스트 박스에서 키보드 눌렀을 때 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FinalMinute_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string minute = string.Empty;
+
+            //숫자만 입력되도록 필터링
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back)))    //숫자와 백스페이스를 제외한 나머지를 바로 처리
+            {
+                e.Handled = true;
+                MessageBox.Show("숫자만 입력할 수 있습니다.", "경고");
+            }
+            else if (char.IsDigit(e.KeyChar))
+            {
+                minute = finalMinuteTextBox.Text + e.KeyChar;
+
+                // 60분 이상 입력 제한
+                if (Convert.ToInt32(minute) >= 60)
+                {
+                    e.Handled = true;
+                    MessageBox.Show("60분 이상 입력 불가합니다.", "경고");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 초 텍스트 박스에서 키보드 눌렀을 때 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FinalSecond_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string second = string.Empty;
+
+            //숫자만 입력되도록 필터링
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back)))    //숫자와 백스페이스를 제외한 나머지를 바로 처리
+            {
+                e.Handled = true;
+                MessageBox.Show("숫자만 입력할 수 있습니다.", "경고");
+            }
+            else if (char.IsDigit(e.KeyChar))
+            {
+                second = finalSecondTextBox.Text + e.KeyChar;
+
+                // 60분 이상 입력 제한
+                if (Convert.ToInt32(second) >= 60)
+                {
+                    e.Handled = true;
+                    MessageBox.Show("60초 이상 입력 불가합니다.", "경고");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 시 변경 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FinalHour_Leave(object sender, EventArgs e)
+        {
+            if (finalHourTextBox.Text.Length < 2)
+            {
+                MessageBox.Show("00h 형태로 입력해주세요.", "경고");
+                finalHourTextBox.Focus();
+            }
+        }
+
+        /// <summary>
+        /// 분 변경 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FinalMinute_Leave(object sender, EventArgs e)
+        {
+            if (finalMinuteTextBox.Text.Length < 2)
+            {
+                MessageBox.Show("00m 형태로 입력해주세요.", "경고");
+                finalMinuteTextBox.Focus();
+            }
+        }
+
+        /// <summary>
+        /// 초 변경 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FinalSecond_Leave(object sender, EventArgs e)
+        {
+            if (finalSecondTextBox.Text.Length < 2)
+            {
+                MessageBox.Show("00s 형태로 입력해주세요.", "경고");
+                finalSecondTextBox.Focus();
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #region ## CheckBox & RadioButton
@@ -758,6 +1171,10 @@ namespace MakeImageFromYoutube
             else if (tabControl.SelectedTab == tabPage2)
             {
                 tabControl.Size = new System.Drawing.Size(796, 255);
+            }
+            else if (tabControl.SelectedTab == tabPage3)
+            {
+                tabControl.Size = new System.Drawing.Size(796, 300);
             }
         }
 
@@ -892,6 +1309,7 @@ namespace MakeImageFromYoutube
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
             return directoryInfo.Exists ? true : false;
         }
+
 
 
         #endregion

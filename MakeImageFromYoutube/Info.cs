@@ -116,6 +116,26 @@ namespace MakeImageFromYoutube
 
         #region ## For Cut Video
 
+        /// <summary>
+        /// 자르기 할 영상 경로
+        /// </summary>
+        public string cutVideoPath { get; set; }
+
+        /// <summary>
+        /// 잘라낸 영상 경로
+        /// </summary>
+        public string cutTargetVideoPath { get; set; }
+
+        /// <summary>
+        /// 잘라낸 영상 이름
+        /// </summary>
+        public string cutVideoName { get; set; }
+
+        /// <summary>
+        /// 잘라낼 영상 종료시간
+        /// </summary>
+        public string finalTime { get; set; }
+
         #endregion
 
         #endregion

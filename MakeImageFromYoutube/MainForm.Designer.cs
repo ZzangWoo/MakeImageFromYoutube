@@ -84,30 +84,33 @@
             this.label24 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.cutVideoNameTextBox = new System.Windows.Forms.TextBox();
-            this.label25 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.findCutVideoPathButton = new System.Windows.Forms.Button();
-            this.cutVideoPathTextBox = new System.Windows.Forms.TextBox();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.finalSecondTextBox = new System.Windows.Forms.TextBox();
+            this.startSecondTextBox = new System.Windows.Forms.TextBox();
+            this.finalMinuteTextBox = new System.Windows.Forms.TextBox();
+            this.startMinuteTextBox = new System.Windows.Forms.TextBox();
+            this.finalHourTextBox = new System.Windows.Forms.TextBox();
+            this.startHourTextBox = new System.Windows.Forms.TextBox();
+            this.label37 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.label39 = new System.Windows.Forms.Label();
+            this.cutVideoNameTextBox = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.cutVideoButton = new System.Windows.Forms.Button();
+            this.findCutTargetVideoPathButton = new System.Windows.Forms.Button();
+            this.findCutVideoPathButton = new System.Windows.Forms.Button();
+            this.cutTargetVideoPathTextBox = new System.Windows.Forms.TextBox();
+            this.cutVideoPathTextBox = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.advancedPannel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frameRateUpDown)).BeginInit();
@@ -696,12 +699,12 @@
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.textBox8);
-            this.panel3.Controls.Add(this.textBox2);
-            this.panel3.Controls.Add(this.textBox7);
-            this.panel3.Controls.Add(this.textBox4);
-            this.panel3.Controls.Add(this.textBox6);
-            this.panel3.Controls.Add(this.textBox5);
+            this.panel3.Controls.Add(this.finalSecondTextBox);
+            this.panel3.Controls.Add(this.startSecondTextBox);
+            this.panel3.Controls.Add(this.finalMinuteTextBox);
+            this.panel3.Controls.Add(this.startMinuteTextBox);
+            this.panel3.Controls.Add(this.finalHourTextBox);
+            this.panel3.Controls.Add(this.startHourTextBox);
             this.panel3.Controls.Add(this.label37);
             this.panel3.Controls.Add(this.label26);
             this.panel3.Controls.Add(this.label36);
@@ -715,42 +718,226 @@
             this.panel3.Controls.Add(this.label32);
             this.panel3.Controls.Add(this.cutVideoNameTextBox);
             this.panel3.Controls.Add(this.label25);
-            this.panel3.Controls.Add(this.button1);
+            this.panel3.Controls.Add(this.cutVideoButton);
+            this.panel3.Controls.Add(this.findCutTargetVideoPathButton);
             this.panel3.Controls.Add(this.findCutVideoPathButton);
+            this.panel3.Controls.Add(this.cutTargetVideoPathTextBox);
             this.panel3.Controls.Add(this.cutVideoPathTextBox);
             this.panel3.Controls.Add(this.label27);
+            this.panel3.Controls.Add(this.label38);
             this.panel3.Controls.Add(this.label28);
             this.panel3.ForeColor = System.Drawing.SystemColors.ControlText;
             this.panel3.Location = new System.Drawing.Point(6, 6);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(774, 221);
+            this.panel3.Size = new System.Drawing.Size(774, 266);
             this.panel3.TabIndex = 4;
+            // 
+            // finalSecondTextBox
+            // 
+            this.finalSecondTextBox.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.finalSecondTextBox.Location = new System.Drawing.Point(474, 228);
+            this.finalSecondTextBox.MaxLength = 2;
+            this.finalSecondTextBox.Name = "finalSecondTextBox";
+            this.finalSecondTextBox.Size = new System.Drawing.Size(36, 21);
+            this.finalSecondTextBox.TabIndex = 11;
+            this.finalSecondTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FinalSecond_KeyPress);
+            this.finalSecondTextBox.Leave += new System.EventHandler(this.FinalSecond_Leave);
+            // 
+            // startSecondTextBox
+            // 
+            this.startSecondTextBox.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.startSecondTextBox.Location = new System.Drawing.Point(140, 228);
+            this.startSecondTextBox.MaxLength = 2;
+            this.startSecondTextBox.Name = "startSecondTextBox";
+            this.startSecondTextBox.Size = new System.Drawing.Size(36, 21);
+            this.startSecondTextBox.TabIndex = 8;
+            this.startSecondTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.StartSecond_KeyPress);
+            this.startSecondTextBox.Leave += new System.EventHandler(this.StartSecond_Leave);
+            // 
+            // finalMinuteTextBox
+            // 
+            this.finalMinuteTextBox.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.finalMinuteTextBox.Location = new System.Drawing.Point(410, 228);
+            this.finalMinuteTextBox.MaxLength = 2;
+            this.finalMinuteTextBox.Name = "finalMinuteTextBox";
+            this.finalMinuteTextBox.Size = new System.Drawing.Size(36, 21);
+            this.finalMinuteTextBox.TabIndex = 10;
+            this.finalMinuteTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FinalMinute_KeyPress);
+            this.finalMinuteTextBox.Leave += new System.EventHandler(this.FinalMinute_Leave);
+            // 
+            // startMinuteTextBox
+            // 
+            this.startMinuteTextBox.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.startMinuteTextBox.Location = new System.Drawing.Point(76, 228);
+            this.startMinuteTextBox.MaxLength = 2;
+            this.startMinuteTextBox.Name = "startMinuteTextBox";
+            this.startMinuteTextBox.Size = new System.Drawing.Size(36, 21);
+            this.startMinuteTextBox.TabIndex = 7;
+            this.startMinuteTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.StartMinute_KeyPress);
+            this.startMinuteTextBox.Leave += new System.EventHandler(this.StartMinute_Leave);
+            // 
+            // finalHourTextBox
+            // 
+            this.finalHourTextBox.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.finalHourTextBox.Location = new System.Drawing.Point(351, 228);
+            this.finalHourTextBox.MaxLength = 2;
+            this.finalHourTextBox.Name = "finalHourTextBox";
+            this.finalHourTextBox.Size = new System.Drawing.Size(35, 21);
+            this.finalHourTextBox.TabIndex = 9;
+            this.finalHourTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FinalHour_KeyPress);
+            this.finalHourTextBox.Leave += new System.EventHandler(this.FinalHour_Leave);
+            // 
+            // startHourTextBox
+            // 
+            this.startHourTextBox.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.startHourTextBox.Location = new System.Drawing.Point(17, 228);
+            this.startHourTextBox.MaxLength = 2;
+            this.startHourTextBox.Name = "startHourTextBox";
+            this.startHourTextBox.Size = new System.Drawing.Size(35, 21);
+            this.startHourTextBox.TabIndex = 6;
+            this.startHourTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.StartHour_KeyPress);
+            this.startHourTextBox.Leave += new System.EventHandler(this.StartHour_Leave);
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(452, 237);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(16, 12);
+            this.label37.TabIndex = 6;
+            this.label37.Text = "m";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(118, 237);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(16, 12);
+            this.label26.TabIndex = 6;
+            this.label26.Text = "m";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(516, 237);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(12, 12);
+            this.label36.TabIndex = 7;
+            this.label36.Text = "s";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(182, 237);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(12, 12);
+            this.label29.TabIndex = 7;
+            this.label29.Text = "s";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(392, 237);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(12, 12);
+            this.label35.TabIndex = 8;
+            this.label35.Text = "h";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(58, 237);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(12, 12);
+            this.label30.TabIndex = 8;
+            this.label30.Text = "h";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.ForeColor = System.Drawing.Color.Red;
+            this.label34.Location = new System.Drawing.Point(408, 212);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(110, 12);
+            this.label34.TabIndex = 9;
+            this.label34.Text = "(ex : 00h 00m 00s)";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.label39.Font = new System.Drawing.Font("굴림", 15F);
+            this.label39.ForeColor = System.Drawing.Color.DarkRed;
+            this.label39.Location = new System.Drawing.Point(264, 231);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(25, 20);
+            this.label39.TabIndex = 10;
+            this.label39.Text = "~";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(349, 212);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(53, 12);
+            this.label33.TabIndex = 10;
+            this.label33.Text = "종료시간";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.ForeColor = System.Drawing.Color.Red;
+            this.label31.Location = new System.Drawing.Point(74, 212);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(110, 12);
+            this.label31.TabIndex = 9;
+            this.label31.Text = "(ex : 00h 00m 00s)";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(15, 212);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(53, 12);
+            this.label32.TabIndex = 10;
+            this.label32.Text = "시작시간";
             // 
             // cutVideoNameTextBox
             // 
-            this.cutVideoNameTextBox.Location = new System.Drawing.Point(16, 126);
+            this.cutVideoNameTextBox.Location = new System.Drawing.Point(16, 174);
             this.cutVideoNameTextBox.Name = "cutVideoNameTextBox";
             this.cutVideoNameTextBox.Size = new System.Drawing.Size(570, 21);
-            this.cutVideoNameTextBox.TabIndex = 3;
+            this.cutVideoNameTextBox.TabIndex = 5;
             // 
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(15, 110);
+            this.label25.Location = new System.Drawing.Point(15, 158);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(97, 12);
             this.label25.TabIndex = 5;
             this.label25.Text = "잘라낸 영상 이름";
             // 
-            // button1
+            // cutVideoButton
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.button1.Location = new System.Drawing.Point(628, 70);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(119, 125);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "자르기";
-            this.button1.UseVisualStyleBackColor = false;
+            this.cutVideoButton.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.cutVideoButton.Location = new System.Drawing.Point(628, 70);
+            this.cutVideoButton.Name = "cutVideoButton";
+            this.cutVideoButton.Size = new System.Drawing.Size(119, 179);
+            this.cutVideoButton.TabIndex = 12;
+            this.cutVideoButton.Text = "자르기";
+            this.cutVideoButton.UseVisualStyleBackColor = false;
+            this.cutVideoButton.Click += new System.EventHandler(this.cutVideoButton_Click);
+            // 
+            // findCutTargetVideoPathButton
+            // 
+            this.findCutTargetVideoPathButton.Location = new System.Drawing.Point(524, 119);
+            this.findCutTargetVideoPathButton.Name = "findCutTargetVideoPathButton";
+            this.findCutTargetVideoPathButton.Size = new System.Drawing.Size(62, 23);
+            this.findCutTargetVideoPathButton.TabIndex = 4;
+            this.findCutTargetVideoPathButton.Text = "찾기";
+            this.findCutTargetVideoPathButton.UseVisualStyleBackColor = true;
+            this.findCutTargetVideoPathButton.Click += new System.EventHandler(this.findCutTargetVideoPathButton_Click);
             // 
             // findCutVideoPathButton
             // 
@@ -760,6 +947,14 @@
             this.findCutVideoPathButton.TabIndex = 2;
             this.findCutVideoPathButton.Text = "찾기";
             this.findCutVideoPathButton.UseVisualStyleBackColor = true;
+            this.findCutVideoPathButton.Click += new System.EventHandler(this.findCutVideoPathButton_Click);
+            // 
+            // cutTargetVideoPathTextBox
+            // 
+            this.cutTargetVideoPathTextBox.Location = new System.Drawing.Point(15, 119);
+            this.cutTargetVideoPathTextBox.Name = "cutTargetVideoPathTextBox";
+            this.cutTargetVideoPathTextBox.Size = new System.Drawing.Size(503, 21);
+            this.cutTargetVideoPathTextBox.TabIndex = 3;
             // 
             // cutVideoPathTextBox
             // 
@@ -778,172 +973,23 @@
             this.label27.TabIndex = 1;
             this.label27.Text = "기본기능";
             // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(13, 104);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(97, 12);
+            this.label38.TabIndex = 0;
+            this.label38.Text = "잘라낸 영상 경로";
+            // 
             // label28
             // 
             this.label28.AutoSize = true;
             this.label28.Location = new System.Drawing.Point(13, 55);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(113, 12);
+            this.label28.Size = new System.Drawing.Size(85, 12);
             this.label28.TabIndex = 0;
-            this.label28.Text = "자르기 할 영상 경로";
-            // 
-            // textBox2
-            // 
-            this.textBox2.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.textBox2.Location = new System.Drawing.Point(140, 180);
-            this.textBox2.MaxLength = 2;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(36, 21);
-            this.textBox2.TabIndex = 13;
-            // 
-            // textBox4
-            // 
-            this.textBox4.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.textBox4.Location = new System.Drawing.Point(76, 180);
-            this.textBox4.MaxLength = 2;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(36, 21);
-            this.textBox4.TabIndex = 12;
-            // 
-            // textBox5
-            // 
-            this.textBox5.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.textBox5.Location = new System.Drawing.Point(17, 180);
-            this.textBox5.MaxLength = 2;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(35, 21);
-            this.textBox5.TabIndex = 11;
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(118, 189);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(16, 12);
-            this.label26.TabIndex = 6;
-            this.label26.Text = "m";
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(182, 189);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(12, 12);
-            this.label29.TabIndex = 7;
-            this.label29.Text = "s";
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(58, 189);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(12, 12);
-            this.label30.TabIndex = 8;
-            this.label30.Text = "h";
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.ForeColor = System.Drawing.Color.Red;
-            this.label31.Location = new System.Drawing.Point(74, 164);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(110, 12);
-            this.label31.TabIndex = 9;
-            this.label31.Text = "(ex : 00h 00m 00s)";
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(15, 164);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(53, 12);
-            this.label32.TabIndex = 10;
-            this.label32.Text = "시작시간";
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(349, 164);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(53, 12);
-            this.label33.TabIndex = 10;
-            this.label33.Text = "종료시간";
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.ForeColor = System.Drawing.Color.Red;
-            this.label34.Location = new System.Drawing.Point(408, 164);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(110, 12);
-            this.label34.TabIndex = 9;
-            this.label34.Text = "(ex : 00h 00m 00s)";
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(392, 189);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(12, 12);
-            this.label35.TabIndex = 8;
-            this.label35.Text = "h";
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(516, 189);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(12, 12);
-            this.label36.TabIndex = 7;
-            this.label36.Text = "s";
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(452, 189);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(16, 12);
-            this.label37.TabIndex = 6;
-            this.label37.Text = "m";
-            // 
-            // textBox6
-            // 
-            this.textBox6.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.textBox6.Location = new System.Drawing.Point(351, 180);
-            this.textBox6.MaxLength = 2;
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(35, 21);
-            this.textBox6.TabIndex = 11;
-            // 
-            // textBox7
-            // 
-            this.textBox7.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.textBox7.Location = new System.Drawing.Point(410, 180);
-            this.textBox7.MaxLength = 2;
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(36, 21);
-            this.textBox7.TabIndex = 12;
-            // 
-            // textBox8
-            // 
-            this.textBox8.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.textBox8.Location = new System.Drawing.Point(474, 180);
-            this.textBox8.MaxLength = 2;
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(36, 21);
-            this.textBox8.TabIndex = 13;
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.label39.Font = new System.Drawing.Font("굴림", 15F);
-            this.label39.ForeColor = System.Drawing.Color.DarkRed;
-            this.label39.Location = new System.Drawing.Point(264, 183);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(25, 20);
-            this.label39.TabIndex = 10;
-            this.label39.Text = "~";
+            this.label28.Text = "자르기 할 영상";
             // 
             // mainForm
             // 
@@ -1033,12 +1079,12 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox finalSecondTextBox;
+        private System.Windows.Forms.TextBox startSecondTextBox;
+        private System.Windows.Forms.TextBox finalMinuteTextBox;
+        private System.Windows.Forms.TextBox startMinuteTextBox;
+        private System.Windows.Forms.TextBox finalHourTextBox;
+        private System.Windows.Forms.TextBox startHourTextBox;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label36;
@@ -1052,11 +1098,14 @@
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.TextBox cutVideoNameTextBox;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button cutVideoButton;
         private System.Windows.Forms.Button findCutVideoPathButton;
         private System.Windows.Forms.TextBox cutVideoPathTextBox;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Button findCutTargetVideoPathButton;
+        private System.Windows.Forms.TextBox cutTargetVideoPathTextBox;
+        private System.Windows.Forms.Label label38;
     }
 }
 
