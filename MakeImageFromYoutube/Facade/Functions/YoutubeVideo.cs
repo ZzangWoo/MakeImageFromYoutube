@@ -100,7 +100,7 @@ namespace MakeImageFromYoutube.Facade.Functions
         {
             try
             {
-                string command = " -i " + info.saveVideoPath + ".mkv -c copy -strict -2 " + info.saveVideoPath + ".mp4";
+                string command = " -i " + info.saveVideoPath + ".mkv -vcodec libx264 -acodec mp3 -strict -2 " + info.saveVideoPath + ".mp4";
 
                 ProcessStartInfo pri = new ProcessStartInfo();
                 pri.CreateNoWindow = false;
