@@ -73,9 +73,24 @@ namespace MakeImageFromYoutube.Facade
             return youtubeAudio.Download(info);
         }
 
+        /// <summary>
+        /// 동영상 자르기
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
         public bool CutVideo(Info info)
         {
             return cutVideo.Cut(info);
+        }
+
+        /// <summary>
+        /// 동영상 MKV -> MP4로 변환
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        public bool ConvertMP4(Info info)
+        {
+            return youtubeVideo.ConvertToMP4(info);
         }
 
         #endregion

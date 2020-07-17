@@ -26,6 +26,11 @@ namespace MakeImageFromYoutube.Facade.Functions
 
         #region # Method
 
+        /// <summary>
+        /// 유튜브 영상 다운로드 메서드
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
         public bool Download(Info info)
         {
             try
@@ -78,6 +83,40 @@ namespace MakeImageFromYoutube.Facade.Functions
                 //pro.Close();
 
                 //log.WriteLog(result);
+            }
+            catch (Exception ex)
+            {
+                log.WriteLog("[ERROR] : " + ex);
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 다운받은 영상 MP4로 변환
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        public bool ConvertToMP4(Info info)
+        {
+            try
+            {
+                string command = " -i " + info.saveVideoPath + ".mkv -c copy -strict -2 " + info.saveVideoPath + ".mp4";
+
+                ProcessStartInfo pri = new ProcessStartInfo();
+                pri.CreateNoWindow = false;
+                pri.UseShellExecute = false;
+                pri.FileName = info.ffmpegPath;
+                pri.WindowStyle = ProcessWindowStyle.Hidden;
+                pri.Arguments = command;
+
+                using (Process pro = Process.Start(pri))
+                {
+                    pro.WaitForExit();
+                }
+
+                log.WriteLog("[SUCCESS] : 유튜브 영상 MP4로 변환 성공");
+
+                return true;
             }
             catch (Exception ex)
             {

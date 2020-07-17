@@ -71,6 +71,9 @@
             this.noRadioButton = new System.Windows.Forms.RadioButton();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.mp4NoRadioButton = new System.Windows.Forms.RadioButton();
+            this.mp4YesRadioButton = new System.Windows.Forms.RadioButton();
+            this.label40 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.saveAudioNameTextBox = new System.Windows.Forms.TextBox();
@@ -111,6 +114,8 @@
             this.label27 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.advancedPannel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frameRateUpDown)).BeginInit();
@@ -120,6 +125,8 @@
             this.panel2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -270,7 +277,7 @@
             this.advancedPannel.Controls.Add(this.label8);
             this.advancedPannel.Controls.Add(this.label4);
             this.advancedPannel.Controls.Add(this.label3);
-            this.advancedPannel.Location = new System.Drawing.Point(6, 255);
+            this.advancedPannel.Location = new System.Drawing.Point(8, 271);
             this.advancedPannel.Name = "advancedPannel";
             this.advancedPannel.Size = new System.Drawing.Size(774, 257);
             this.advancedPannel.TabIndex = 3;
@@ -518,7 +525,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 235);
+            this.label6.Location = new System.Drawing.Point(9, 11);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(109, 12);
             this.label6.TabIndex = 4;
@@ -527,7 +534,7 @@
             // yesRadioButton
             // 
             this.yesRadioButton.AutoSize = true;
-            this.yesRadioButton.Location = new System.Drawing.Point(146, 233);
+            this.yesRadioButton.Location = new System.Drawing.Point(149, 9);
             this.yesRadioButton.Name = "yesRadioButton";
             this.yesRadioButton.Size = new System.Drawing.Size(31, 16);
             this.yesRadioButton.TabIndex = 6;
@@ -539,7 +546,7 @@
             // noRadioButton
             // 
             this.noRadioButton.AutoSize = true;
-            this.noRadioButton.Location = new System.Drawing.Point(183, 233);
+            this.noRadioButton.Location = new System.Drawing.Point(186, 9);
             this.noRadioButton.Name = "noRadioButton";
             this.noRadioButton.Size = new System.Drawing.Size(32, 16);
             this.noRadioButton.TabIndex = 7;
@@ -562,11 +569,10 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.panel5);
+            this.tabPage1.Controls.Add(this.panel4);
             this.tabPage1.Controls.Add(this.panel1);
             this.tabPage1.Controls.Add(this.advancedPannel);
-            this.tabPage1.Controls.Add(this.noRadioButton);
-            this.tabPage1.Controls.Add(this.label6);
-            this.tabPage1.Controls.Add(this.yesRadioButton);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -574,6 +580,39 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Video";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // mp4NoRadioButton
+            // 
+            this.mp4NoRadioButton.AutoSize = true;
+            this.mp4NoRadioButton.Location = new System.Drawing.Point(159, 9);
+            this.mp4NoRadioButton.Name = "mp4NoRadioButton";
+            this.mp4NoRadioButton.Size = new System.Drawing.Size(32, 16);
+            this.mp4NoRadioButton.TabIndex = 8;
+            this.mp4NoRadioButton.TabStop = true;
+            this.mp4NoRadioButton.Text = "N";
+            this.mp4NoRadioButton.UseVisualStyleBackColor = true;
+            this.mp4NoRadioButton.CheckedChanged += new System.EventHandler(this.mp4NoRadioButton_CheckedChanged);
+            // 
+            // mp4YesRadioButton
+            // 
+            this.mp4YesRadioButton.AutoSize = true;
+            this.mp4YesRadioButton.Location = new System.Drawing.Point(122, 9);
+            this.mp4YesRadioButton.Name = "mp4YesRadioButton";
+            this.mp4YesRadioButton.Size = new System.Drawing.Size(31, 16);
+            this.mp4YesRadioButton.TabIndex = 8;
+            this.mp4YesRadioButton.TabStop = true;
+            this.mp4YesRadioButton.Text = "Y";
+            this.mp4YesRadioButton.UseVisualStyleBackColor = true;
+            this.mp4YesRadioButton.CheckedChanged += new System.EventHandler(this.mp4YesRadioButton_CheckedChanged);
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(12, 11);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(86, 12);
+            this.label40.TabIndex = 4;
+            this.label40.Text = "MP4 변환 여부";
             // 
             // tabPage2
             // 
@@ -991,13 +1030,33 @@
             this.label28.TabIndex = 0;
             this.label28.Text = "자르기 할 영상";
             // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.noRadioButton);
+            this.panel4.Controls.Add(this.yesRadioButton);
+            this.panel4.Controls.Add(this.label6);
+            this.panel4.Location = new System.Drawing.Point(7, 233);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(236, 32);
+            this.panel4.TabIndex = 9;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.label40);
+            this.panel5.Controls.Add(this.mp4YesRadioButton);
+            this.panel5.Controls.Add(this.mp4NoRadioButton);
+            this.panel5.Location = new System.Drawing.Point(402, 233);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(226, 32);
+            this.panel5.TabIndex = 10;
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(797, 543);
+            this.ClientSize = new System.Drawing.Size(797, 549);
             this.Controls.Add(this.tabControl);
             this.MaximizeBox = false;
             this.Name = "mainForm";
@@ -1010,13 +1069,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.frameRateUpDown)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1106,6 +1168,11 @@
         private System.Windows.Forms.Button findCutTargetVideoPathButton;
         private System.Windows.Forms.TextBox cutTargetVideoPathTextBox;
         private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.RadioButton mp4NoRadioButton;
+        private System.Windows.Forms.RadioButton mp4YesRadioButton;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel5;
     }
 }
 

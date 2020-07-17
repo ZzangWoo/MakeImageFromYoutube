@@ -16,6 +16,13 @@ namespace MakeImageFromYoutube
         public bool checkedAdvanced { get; set; } = false;
 
         /// <summary>
+        /// MP4 변환 선택 유무
+        /// 선택 O => true
+        /// 선택 X => false
+        /// </summary>
+        public bool checkedMP4 { get; set; } = false;
+
+        /// <summary>
         /// 고급기능 -> 시
         /// </summary>
         public string hour { get; set; } = "00";
