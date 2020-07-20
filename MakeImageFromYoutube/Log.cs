@@ -63,6 +63,7 @@ namespace MakeImageFromYoutube
                 using (StreamWriter streamWriter = new StreamWriter(infoPath + infoFile, false, Encoding.UTF8))
                 {
                     streamWriter.WriteLine("{0},{1}", "checkedAdvanced", info.checkedAdvanced);
+                    streamWriter.WriteLine("{0},{1}", "checkedMP4", info.checkedMP4);
                     streamWriter.WriteLine("{0},{1}", "hour", info.hour);
                     streamWriter.WriteLine("{0},{1}", "minute", info.minute);
                     streamWriter.WriteLine("{0},{1}", "second", info.second);
@@ -105,6 +106,9 @@ namespace MakeImageFromYoutube
                         {
                             case "checkedAdvanced":
                                 info.checkedAdvanced = listArray[1] == "True" ? true : false;
+                                break;
+                            case "checkedMP4":
+                                info.checkedMP4 = listArray[1] == "True" ? true : false;
                                 break;
                             case "hour":
                                 info.hour = listArray[1];

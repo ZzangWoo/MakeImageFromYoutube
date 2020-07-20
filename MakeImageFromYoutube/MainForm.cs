@@ -248,7 +248,37 @@ namespace MakeImageFromYoutube
                             bool result = youtubeToImages.DownloadYoutubeVideo(info);
                             if (result)
                             {
-                                MessageBox.Show("유튜브 영상 다운 성공", "알림");
+                                if (mp4YesRadioButton.Checked)
+                                {
+                                    info.ffmpegPath = Application.StartupPath + @"\ffmpeg\bin\ffmpeg";
+
+                                    result = youtubeToImages.ConvertMP4(info);
+                                    if (result)
+                                    {
+                                        if (IsExistFile(info.saveVideoPath + ".mkv"))
+                                        {
+                                            try
+                                            {
+                                                System.IO.File.Delete(info.saveVideoPath + ".mkv");
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                log.WriteLog("[ERROR]_MP4변환 : " + ex);
+                                                MessageBox.Show("유튜브 영상 변환 중 오류가 발생했습니다.", "오류");
+                                            }
+                                        }
+
+                                        MessageBox.Show("유튜브 영상 다운 성공", "알림");
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("유튜브 영상 다운 실패", "알림");
+                                    }
+                                }
+                                else if (mp4NoRadioButton.Checked)
+                                {
+                                    MessageBox.Show("유튜브 영상 다운 성공", "알림");
+                                }
                             }
                             else
                             {
@@ -1082,7 +1112,7 @@ namespace MakeImageFromYoutube
             advancedPannel.Visible = true;
 
             // 탭 컨트롤 크기 조정
-            tabControl.Size = new System.Drawing.Size(796, 543);
+            tabControl.Size = new System.Drawing.Size(796, 563);
         }
 
         /// <summary>
@@ -1098,10 +1128,28 @@ namespace MakeImageFromYoutube
             advancedPannel.Visible = false;
 
             // 탭 컨트롤 크기 조정
-            tabControl.Size = new System.Drawing.Size(788, 280);
+            tabControl.Size = new System.Drawing.Size(788, 295);
         }
 
+        /// <summary>
+        /// MP4 변환 여부 Y 라디오버튼 클릭
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mp4YesRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            info.checkedMP4 = true;
+        }
 
+        /// <summary>
+        /// MP4 변환 여부 N 라디오버튼 클릭
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mp4NoRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            info.checkedMP4 = false;
+        }
 
         /// <summary>
         /// 변환할 동영상 경로 체크박스 변화 이벤트
@@ -1161,11 +1209,11 @@ namespace MakeImageFromYoutube
             {
                 if (yesRadioButton.Checked)
                 {
-                    tabControl.Size = new System.Drawing.Size(796, 543);
+                    tabControl.Size = new System.Drawing.Size(796, 563);
                 }
                 else if (noRadioButton.Checked)
                 {
-                    tabControl.Size = new System.Drawing.Size(796, 280);
+                    tabControl.Size = new System.Drawing.Size(796, 295);
                 }
             }
             else if (tabControl.SelectedTab == tabPage2)
@@ -1235,6 +1283,9 @@ namespace MakeImageFromYoutube
                 // No 라디오 버튼 활성화
                 noRadioButton.Checked = true;
 
+                // mp4변환 No 라디오 버튼 활성화
+                mp4NoRadioButton.Checked = true;
+
                 // 변환할 동영상 경로 체크박스 비활성화
                 videoPathCheckBox.Checked = info.isCheckVideoPath;
                 videoPathTextBox.Enabled = info.isCheckVideoPath;
@@ -1266,6 +1317,16 @@ namespace MakeImageFromYoutube
                 else
                 {
                     noRadioButton.Checked = true;
+                }
+
+                // MP4 변환기능 초기화
+                if (info.checkedMP4)
+                {
+                    mp4YesRadioButton.Checked = true;
+                }
+                else
+                {
+                    mp4NoRadioButton.Checked = true;
                 }
 
                 // 변환할 동영상 경로 체크박스 초기화
